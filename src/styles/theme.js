@@ -14,6 +14,7 @@ const theme = {
     md: "16px",
     lg: "24px",
     xl: "32px",
+    xxl: "40px",
   },
   borderRadius: {
     sm: "4px",

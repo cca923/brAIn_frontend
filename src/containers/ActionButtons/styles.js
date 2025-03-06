@@ -7,6 +7,7 @@ export const ButtonsContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: ${({ theme }) => theme.spacing.md};
   margin-top: ${({ theme }) => theme.spacing.xl};
+  padding: 0 150px;
 `;
 
 export const ActionButton = styled(Button)`

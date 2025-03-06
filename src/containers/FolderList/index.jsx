@@ -16,6 +16,7 @@ import {
   FolderListContainer,
 } from "./styles";
 import FolderItem from "./FolderItem";
+import { scrollToBottom } from "../../utils/scroll";
 
 const FolderList = () => {
   const dispatch = useDispatch();
@@ -45,13 +46,8 @@ const FolderList = () => {
 
   useEffect(() => {
     // Only scroll to the bottom if a new folder is added
-    if (folders.length > prevFolderLength.current) {
-      if (folderListRef.current) {
-        folderListRef.current.scrollTo({
-          top: folderListRef.current.scrollHeight,
-          behavior: "smooth",
-        });
-      }
+    if (folders?.length > prevFolderLength?.current) {
+      scrollToBottom(folderListRef?.current);
     }
     prevFolderLength.current = folders.length;
   }, [folders]);

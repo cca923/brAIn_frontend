@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
 export const FilesContainer = styled.div`
+  height: 380px;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.md};
+  background-color: ${({ theme }) => theme.colors.light};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  gap: ${({ theme }) => theme.spacing.sm};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
+  padding: ${({ theme }) => theme.spacing.md};
 `;
 
 export const FileItem = styled.div`
-  padding: ${({ theme }) => theme.spacing.lg};
+  padding: ${({ theme }) => theme.spacing.sm};
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   border: 1px solid ${({ theme }) => theme.colors.light};
@@ -22,6 +27,7 @@ export const FileItem = styled.div`
 
 export const NoFiles = styled.div`
   text-align: center;
+  margin: auto;
   color: ${({ theme }) => theme.colors.gray};
   padding: ${({ theme }) => theme.spacing.lg};
 `;

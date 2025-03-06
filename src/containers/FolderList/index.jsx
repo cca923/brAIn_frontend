@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectFolder,
@@ -13,25 +13,22 @@ import {
   ButtonGroup,
   CancelButton,
   ConfirmButton,
-  FolderItem,
   FolderListContainer,
-  FolderName,
-  Heading,
-  Input,
-  RemoveButton,
 } from "./styles";
+import FolderItem from "./FolderItem";
 
 const FolderList = () => {
-  const { folders, isAddingFolder } = useSelector(folderSelector);
   const dispatch = useDispatch();
+  const { folders, isAddingFolder } = useSelector(folderSelector);
   const [newFolderName, setNewFolderName] = useState("");
+  const folderListRef = useRef(null); // Reference to the folder list container
+  const prevFolderLength = useRef(folders.length); // Keep track of previous length of the folder list
 
   const handleFolderClick = ({ id }) => {
     dispatch(selectFolder(id));
   };
 
-  const handleRemoveFolder = ({ e, id }) => {
-    e.stopPropagation();
+  const handleRemoveFolder = ({ id }) => {
     dispatch(removeFolder(id));
   };
 
@@ -46,28 +43,38 @@ const FolderList = () => {
     }
   };
 
+  useEffect(() => {
+    // Only scroll to the bottom if a new folder is added
+    if (folders.length > prevFolderLength.current) {
+      if (folderListRef.current) {
+        folderListRef.current.scrollTo({
+          top: folderListRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    }
+    prevFolderLength.current = folders.length;
+  }, [folders]);
+
   return (
     <FolderListContainer>
-      <Heading>Folders</Heading>
-
-      {folders?.map((folder) => (
-        <FolderItem
-          key={folder.id}
-          selected={folder.selected}
-          onClick={() => handleFolderClick({ id: folder.id })}
-        >
-          <FolderName selected={folder.selected}>{folder.name}</FolderName>
-          <RemoveButton
-            onClick={(e) => handleRemoveFolder({ e, id: folder.id })}
-          >
-            ×
-          </RemoveButton>
-        </FolderItem>
-      ))}
+      <h2 className="title">Folders</h2>
+      <div className="wrapper" ref={folderListRef}>
+        {folders?.map((folder) => (
+          <FolderItem
+            key={folder.id}
+            folderId={folder.id}
+            selected={folder.selected}
+            name={folder.name}
+            onClick={handleFolderClick}
+            onRemove={handleRemoveFolder}
+          ></FolderItem>
+        ))}
+      </div>
 
       {isAddingFolder ? (
         <AddFolderInput>
-          <Input
+          <input
             type="text"
             placeholder="Enter the folder name"
             value={newFolderName}

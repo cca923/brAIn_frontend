@@ -7,4 +7,8 @@ export const HeaderContainer = styled.header`
 export const Title = styled.h1`
   font-size: 28px;
   color: ${({ theme }) => theme.colors.dark};
+  max-width: calc(100vw - 347px);
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;

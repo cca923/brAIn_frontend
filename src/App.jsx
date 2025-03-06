@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFoldersAsync } from "./store/folder/service";
 import { loadFilesForFolderAsync } from "./store/file/service";
+import { folderSelector, fileSelector } from "./store/selectors";
 import { LoadingOverlay, SidebarContainer } from "./styles/styles";
 import Layout from "./components/Layout";
 import FolderList from "./containers/FolderList";
 import Header from "./containers/Header";
 import FileList from "./containers/FileList";
 import FileUploader from "./containers/FileUploader";
-
-import { folderSelector, fileSelector } from "./store/selectors";
+import ActionButtons from "./containers/ActionButtons";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +44,7 @@ function App() {
         <Header />
         <FileList />
         <FileUploader />
+        <ActionButtons />
       </Layout>
     </>
   );

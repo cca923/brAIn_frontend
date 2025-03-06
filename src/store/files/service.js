@@ -39,7 +39,7 @@ export const handleLoadFiles = createAsyncThunk(
 
 export const handleUploadFile = createAsyncThunk(
   filesType.handleUploadFile,
-  async ({ file, folderId }, { dispatch }) => {
+  async ({ folderId, file }, { dispatch }) => {
     try {
       // Validate file type
       const fileType = file.name.split(".").pop().toLowerCase();
@@ -77,7 +77,6 @@ export const handleUploadFile = createAsyncThunk(
 
       return {
         file,
-        folderId,
       };
     } catch (error) {
       return Promise.reject(error.message);
@@ -87,7 +86,7 @@ export const handleUploadFile = createAsyncThunk(
 
 export const handleRemoveFile = createAsyncThunk(
   filesType.handleRemoveFile,
-  async ({ fileId, folderId }) => {
+  async ({ folderId, fileId }) => {
     try {
       // Simulate API call
       await delay(500);
@@ -97,10 +96,8 @@ export const handleRemoveFile = createAsyncThunk(
       //   method: 'DELETE'
       // });
 
-      // For now, just dispatch the regular action
       return {
         fileId,
-        folderId,
       };
     } catch (error) {
       return Promise.reject(error.message);

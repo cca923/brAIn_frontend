@@ -16,7 +16,7 @@ const FileList = () => {
   const fileListRef = useRef(null);
 
   const handleFileRemove = ({ id }) => {
-    dispatch(handleRemoveFile({ fileId: id, folderId: selectedFolderId }));
+    dispatch(handleRemoveFile({ folderId: selectedFolderId, fileId: id }));
   };
 
   useEffect(() => {

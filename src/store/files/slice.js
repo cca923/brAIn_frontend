@@ -43,22 +43,15 @@ const fileSlice = createSlice({
         state.error = null;
       })
       .addCase(handleUploadFile.fulfilled, (state, action) => {
-        const { file, folderId } = action.payload;
-
-        state.loadingMap.addFile = false;
-
-        // Create new folder array if it doesn't exist
-        if (!state.filesMap[folderId]) {
-          state.filesMap[folderId] = [];
-        }
-
+        const { file } = action.payload;
         const item = {
           id: Date.now().toString(),
           name: file.name,
-          folderId,
           type: file.name.split(".").pop(),
         };
-        state.filesMap[folderId].push(item);
+
+        state.loadingMap.addFile = false;
+        state.files.push(item);
         state.uploadError = null;
       })
       .addCase(handleUploadFile.rejected, (state, action) => {
@@ -71,12 +64,10 @@ const fileSlice = createSlice({
         state.error = null;
       })
       .addCase(handleRemoveFile.fulfilled, (state, action) => {
-        const { fileId, folderId } = action.payload;
+        const { fileId } = action.payload;
 
         state.loadingMap.removeFile = false;
-        state.filesMap[folderId] = state.filesMap[folderId].filter(
-          (file) => file.id !== fileId
-        );
+        state.files = state.files?.filter((file) => file.id !== fileId);
       })
       .addCase(handleRemoveFile.rejected, (state, action) => {
         state.loadingMap.removeFile = false;

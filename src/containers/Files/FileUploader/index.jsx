@@ -34,7 +34,7 @@ const FileUploader = () => {
 
     try {
       await dispatch(
-        handleUploadFile({ file, folderId: selectedFolderId })
+        handleUploadFile({ folderId: selectedFolderId, file })
       ).unwrap();
     } catch (error) {
       console.error("Upload failed:", error);

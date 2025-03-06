@@ -1,15 +1,11 @@
 import styled from "styled-components";
 
-export const FilesContainer = styled.div`
-  height: 380px;
+export const FileListContainer = styled.div`
+  height: 350px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.light};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
   gap: ${({ theme }) => theme.spacing.sm};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  padding: ${({ theme }) => theme.spacing.md};
 `;
 
 export const FileItem = styled.div`

@@ -6,7 +6,6 @@ export const ButtonsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: ${({ theme }) => theme.spacing.md};
-  margin-top: ${({ theme }) => theme.spacing.xl};
   padding: 0 150px;
 `;
 

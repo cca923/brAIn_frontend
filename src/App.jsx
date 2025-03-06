@@ -7,8 +7,7 @@ import { LoadingOverlay, SidebarContainer } from "./styles/styles";
 import Layout from "./components/Layout";
 import FolderList from "./containers/FolderList";
 import Header from "./containers/Header";
-import FileList from "./containers/FileList";
-import FileUploader from "./containers/FileUploader";
+import Files from "./containers/Files";
 import ActionButtons from "./containers/ActionButtons";
 
 function App() {
@@ -42,8 +41,7 @@ function App() {
         }
       >
         <Header />
-        <FileList />
-        <FileUploader />
+        <Files />
         <ActionButtons />
       </Layout>
     </>

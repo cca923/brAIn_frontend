@@ -1,16 +1,19 @@
 import styled from "styled-components";
+import { Button } from "../../../styles/common";
 
 export const UploaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: ${({ theme }) => theme.spacing.lg} 0;
+  margin-top: auto;
 `;
 
-export const UploadButton = styled.button`
+export const UploadButton = styled(Button)`
   background-color: ${({ theme, disabled }) =>
-    disabled ? theme.colors.gray : theme.colors.primary};
-  color: ${({ theme }) => theme.colors.white};
+    disabled ? theme.colors.gray : `${theme.colors.secondary}50`};
+  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.white : theme.colors.primary};
   padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.lg}`};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-weight: bold;
@@ -22,7 +25,7 @@ export const UploadButton = styled.button`
 
   &:hover {
     background-color: ${({ theme, disabled }) =>
-      disabled ? theme.colors.gray : `${theme.colors.primary}DD`};
+      disabled ? theme.colors.gray : `${theme.colors.secondary}50`};
   }
 `;
 
@@ -34,11 +37,4 @@ export const ErrorMessage = styled.div`
   color: ${({ theme }) => theme.colors.danger};
   margin-top: ${({ theme }) => theme.spacing.md};
   text-align: center;
-`;
-
-export const LoadingIndicator = styled.div`
-  color: ${({ theme }) => theme.colors.primary};
-  margin-top: ${({ theme }) => theme.spacing.md};
-  text-align: center;
-  font-style: italic;
 `;

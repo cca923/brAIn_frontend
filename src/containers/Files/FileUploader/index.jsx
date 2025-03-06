@@ -1,14 +1,14 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { uploadFileAsync } from "../../store/file/service";
-import { folderSelector, fileSelector } from "../../store/selectors";
+
+import { uploadFileAsync } from "../../../store/file/service";
+import { folderSelector, fileSelector } from "../../../store/selectors";
 
 import {
   UploaderContainer,
   UploadButton,
   HiddenInput,
   ErrorMessage,
-  LoadingIndicator,
 } from "./styles";
 
 const FileUploader = () => {
@@ -58,7 +58,6 @@ const FileUploader = () => {
         disabled={isUploading}
       />
       {uploadError && <ErrorMessage>{uploadError}</ErrorMessage>}
-      {isUploading && <LoadingIndicator>Processing file...</LoadingIndicator>}
     </UploaderContainer>
   );
 };

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { RemoveButton } from "../../../styles/common";
 
 export const FolderItemContainer = styled.div`
   padding: ${({ theme }) => theme.spacing.md};
@@ -21,16 +22,12 @@ export const FolderName = styled.div`
   color: ${({ selected, theme }) =>
     selected ? theme.colors.primary : theme.colors.dark};
   font-weight: ${({ selected }) => (selected ? "bold" : "normal")};
-  white-space: normal;
+  white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 `;
 
-export const RemoveButton = styled.button`
-  background: transparent;
-  color: ${({ theme }) => theme.colors.danger};
-  opacity: 0;
-  transition: opacity 0.2s;
+export const RemoveBtn = styled(RemoveButton)`
   margin-left: ${({ theme }) => theme.spacing.sm};
 
   ${FolderItemContainer}:hover & {

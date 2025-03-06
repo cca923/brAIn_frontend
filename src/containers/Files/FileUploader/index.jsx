@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { uploadFileAsync } from "../../../store/file/service";
+import { handleUploadFile } from "../../../store/files/service";
 import { folderSelector, fileSelector } from "../../../store/selectors";
 
 import {
@@ -16,7 +16,7 @@ const FileUploader = () => {
   const dispatch = useDispatch();
   const { uploadError } = useSelector(fileSelector);
 
-  const { currentFolder } = useSelector(folderSelector);
+  const { selectedFolderId } = useSelector(folderSelector);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleUploadClick = () => {
@@ -34,7 +34,7 @@ const FileUploader = () => {
 
     try {
       await dispatch(
-        uploadFileAsync({ file, folderId: currentFolder })
+        handleUploadFile({ file, folderId: selectedFolderId })
       ).unwrap();
     } catch (error) {
       console.error("Upload failed:", error);

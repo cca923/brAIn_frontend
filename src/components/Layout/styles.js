@@ -12,5 +12,6 @@ export const Sidebar = styled.div`
 `;
 
 export const MainContent = styled.div`
+  max-width: calc(100vw - 300px);
   padding: ${({ theme }) => theme.spacing.lg};
 `;

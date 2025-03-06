@@ -1,11 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectFolder,
-  toggleAddFolder,
-  addFolder,
-  removeFolder,
-} from "../../store/folder/slice";
+import { toggleAddFolder } from "../../store/folders/slice";
 import { folderSelector } from "../../store/selectors";
 import {
   AddFolderButton,
@@ -17,20 +12,26 @@ import {
 } from "./styles";
 import FolderItem from "./FolderItem";
 import { scrollToBottom } from "../../utils/scroll";
+import {
+  handleAddFolder,
+  handleLoadFolders,
+  handleRemoveFolder,
+} from "../../store/folders/service";
 
 const FolderList = () => {
   const dispatch = useDispatch();
-  const { folders, isAddingFolder } = useSelector(folderSelector);
+  const { folders, selectedFolderId, isAddingFolder } =
+    useSelector(folderSelector);
   const [newFolderName, setNewFolderName] = useState("");
   const folderListRef = useRef(null); // Reference to the folder list container
   const prevFolderLength = useRef(folders.length); // Keep track of previous length of the folder list
 
   const handleFolderClick = ({ id }) => {
-    dispatch(selectFolder(id));
+    dispatch(handleLoadFolders({ folderId: id }));
   };
 
-  const handleRemoveFolder = ({ id }) => {
-    dispatch(removeFolder(id));
+  const handleFolderRemove = ({ id }) => {
+    dispatch(handleRemoveFolder({ folderId: id }));
   };
 
   const handleAddFolderClick = () => {
@@ -40,7 +41,7 @@ const FolderList = () => {
 
   const handleConfirmAddFolder = () => {
     if (newFolderName.trim()) {
-      dispatch(addFolder(newFolderName.trim()));
+      dispatch(handleAddFolder({ name: newFolderName.trim() }));
     }
   };
 
@@ -60,10 +61,10 @@ const FolderList = () => {
           <FolderItem
             key={folder.id}
             folderId={folder.id}
-            selected={folder.selected}
+            selected={folder.id === selectedFolderId}
             name={folder.name}
             onClick={handleFolderClick}
-            onRemove={handleRemoveFolder}
+            onRemove={handleFolderRemove}
           ></FolderItem>
         ))}
       </div>

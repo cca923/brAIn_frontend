@@ -1,7 +1,7 @@
-import folder from "./folder/slice";
-import file from "./file/slice";
+import folders from "./folders/slice";
+import files from "./files/slice";
 
 export const rootReducer = {
-  folder,
-  file,
+  folders,
+  files,
 };

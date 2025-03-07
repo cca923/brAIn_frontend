@@ -5,12 +5,13 @@ import { handleLoadFolders } from "../../store/folders/service";
 import { handleLoadFiles } from "../../store/files/service";
 import { folderSelector, isPageLoadingSelector } from "../../store/selectors";
 import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
 import FolderList from "../../containers/FolderList";
 import Header from "../../containers/Header";
 import Files from "../../containers/Files";
 import ActionButtons from "../../containers/ActionButtons";
 
-import { LoadingOverlay, SidebarContainer } from "./styles";
+import { SidebarContainer } from "./styles";
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function MainPage() {
 
   return (
     <>
-      {isLoading && <LoadingOverlay>Loading...</LoadingOverlay>}
+      {isLoading && <Loading />}
       <Layout
         sidebar={
           <SidebarContainer>

@@ -5,6 +5,7 @@ export const Button = styled.button`
   padding: ${({ theme }) => theme.spacing.md};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-weight: bold;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.8;

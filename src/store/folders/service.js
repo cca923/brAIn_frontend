@@ -6,8 +6,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadFolders = createAsyncThunk(
   foldersType.handleLoadFolders,
-  // TODO: change to default one
-  async ({ folderId = "2" } = {}) => {
+  async ({ folderId } = {}) => {
     try {
       // Simulate API call
       await delay(700);

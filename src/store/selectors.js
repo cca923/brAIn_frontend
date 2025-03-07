@@ -2,10 +2,17 @@ export const folderSelector = (state) => state.folders;
 
 export const fileSelector = (state) => state.files;
 
-export const isPageLoadingSelector = (state) => {
-  const { folders, files } = state;
-  const isLoadingFolders = folders?.loadingMap?.loadFolders;
-  const isLoadingFiles = files?.loadingMap?.loadFiles;
+export const quizSelector = (state) => state.quiz;
 
-  return isLoadingFolders || isLoadingFiles;
+export const isPageLoadingSelector = (state) => {
+  const { folders, files, quiz } = state;
+
+  const loadingStates = [
+    folders?.loadingMap?.loadFolders,
+    files?.loadingMap?.loadFiles,
+    quiz?.loadingMap?.loadQuizzes,
+    quiz?.loadingMap?.submitQuiz,
+  ];
+
+  return loadingStates.some((loadingState) => loadingState === true);
 };

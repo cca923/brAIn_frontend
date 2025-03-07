@@ -9,3 +9,8 @@ export const filesType = {
   handleUploadFile: "files/handleUploadFile",
   handleRemoveFile: "files/handleRemoveFile",
 };
+
+export const quizType = {
+  handleLoadQuizzes: "quiz/handleLoadQuizzes",
+  handleSubmitQuiz: "quiz/handleSubmitQuiz",
+};

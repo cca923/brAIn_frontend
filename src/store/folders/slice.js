@@ -38,6 +38,12 @@ const folderSlice = createSlice({
         state.loadingMap.loadFolders = false;
         state.folders = folders;
         state.selectedFolderId = folderId;
+
+        // Handle default id
+        if (!folderId) {
+          state.selectedFolderId = state.folders[0].id;
+          state.folders[0].selected = true;
+        }
       })
       .addCase(handleLoadFolders.rejected, (state, action) => {
         state.loadingMap.loadFolders = false;

@@ -1,29 +1,17 @@
 import { ButtonsContainer } from "./styles";
 
-import ActionButton from "../../components/ActionButton";
+import SummarizationButton from "../Buttons/SummarizationButton";
+import PastButton from "../Buttons/PastButton";
+import QuizButton from "../Buttons/QuizButton";
+import ChatButton from "../Buttons/ChatButton";
 
-const ActionButtons = () => {
-  const actions = [
-    {
-      route: "summarization",
-      name: "View Summarization",
-      icon: "🔍",
-      onClick: () => {},
-    },
-    { route: "past", name: "Past Learning", icon: "📚", onClick: () => {} },
-    { route: "chat", name: "AI Chat", icon: "🎤", onClick: () => {} },
-    { route: "quiz", name: "AI Quiz", icon: "📝", onClick: () => {} },
-  ];
-
-  return (
-    <ButtonsContainer>
-      {actions?.map((action) => (
-        <ActionButton key={action?.route} onClick={action?.onClick}>
-          <span>{action?.icon}</span> {action?.name}
-        </ActionButton>
-      ))}
-    </ButtonsContainer>
-  );
-};
+const ActionButtons = () => (
+  <ButtonsContainer>
+    <SummarizationButton />
+    <PastButton />
+    <QuizButton />
+    <ChatButton />
+  </ButtonsContainer>
+);
 
 export default ActionButtons;

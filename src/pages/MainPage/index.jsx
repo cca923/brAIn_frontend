@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { handleLoadFolders } from "../../store/folders/service";
 import { handleLoadFiles } from "../../store/files/service";
-import { folderSelector, isPageLoadingSelector } from "../../store/selectors";
+import { folderSelector } from "../../store/selectors";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
 import FolderList from "../../containers/FolderList";
@@ -16,12 +16,14 @@ import { SidebarContainer } from "./styles";
 function MainPage() {
   const dispatch = useDispatch();
   const { selectedFolderId } = useSelector(folderSelector);
-  const isLoading = useSelector(isPageLoadingSelector);
 
   useEffect(() => {
     // Load folders when component mounts
-    dispatch(handleLoadFolders());
-  }, [dispatch]);
+    if (!selectedFolderId) {
+      console.log("trigger");
+      dispatch(handleLoadFolders({ folderId: selectedFolderId }));
+    }
+  }, [dispatch, selectedFolderId]);
 
   useEffect(() => {
     // Load files when current folder changes
@@ -31,20 +33,17 @@ function MainPage() {
   }, [dispatch, selectedFolderId]);
 
   return (
-    <>
-      {isLoading && <Loading />}
-      <Layout
-        sidebar={
-          <SidebarContainer>
-            <FolderList />
-          </SidebarContainer>
-        }
-      >
-        <Header />
-        <Files />
-        <ActionButtons />
-      </Layout>
-    </>
+    <Layout
+      sidebar={
+        <SidebarContainer>
+          <FolderList />
+        </SidebarContainer>
+      }
+    >
+      <Header />
+      <Files />
+      <ActionButtons />
+    </Layout>
   );
 }
 

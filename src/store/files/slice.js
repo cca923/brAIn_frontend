@@ -22,6 +22,7 @@ const fileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Load Files API
       .addCase(handleLoadFiles.pending, (state) => {
         state.loadingMap.loadFiles = true;
         state.error = null;
@@ -36,8 +37,7 @@ const fileSlice = createSlice({
         state.loadingMap.loadFiles = false;
         state.error = action.error.message;
       })
-
-      // Handle Add Folder Actions
+      // Upload File API
       .addCase(handleUploadFile.pending, (state) => {
         state.loadingMap.addFile = true;
         state.error = null;
@@ -58,7 +58,7 @@ const fileSlice = createSlice({
         state.loadingMap.addFile = false;
         state.error = action.error.message;
       })
-
+      // Remove File API
       .addCase(handleRemoveFile.pending, (state) => {
         state.loadingMap.removeFile = true;
         state.error = null;

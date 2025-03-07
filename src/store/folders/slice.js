@@ -27,6 +27,7 @@ const folderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Load Folders API
       .addCase(handleLoadFolders.pending, (state) => {
         state.loadingMap.loadFolders = true;
         state.error = null;
@@ -42,7 +43,7 @@ const folderSlice = createSlice({
         state.loadingMap.loadFolders = false;
         state.error = action.error.message;
       })
-
+      // Add Folder API
       .addCase(handleAddFolder.pending, (state) => {
         state.loadingMap.addFolder = true;
         state.error = null;
@@ -63,8 +64,7 @@ const folderSlice = createSlice({
         state.loadingMap.addFolder = false;
         state.error = action.error.message;
       })
-
-      // Handle Remove Folder Actions
+      // Remove Folder API
       .addCase(handleRemoveFolder.pending, (state) => {
         state.loadingMap.removeFolder = true;
         state.error = null;

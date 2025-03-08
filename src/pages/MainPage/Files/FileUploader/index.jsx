@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { handleUploadFile } from "../../../store/files/service";
-import { fileSelector } from "../../../store/selectors";
+import { handleUploadFile } from "../../../../store/files/service";
+import { fileSelector } from "../../../../store/selectors";
 
 import {
   UploaderContainer,

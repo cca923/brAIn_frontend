@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fileSelector } from "../../../store/selectors";
-import { handleRemoveFile } from "../../../store/files/service";
-import { scrollToBottom } from "../../../utils/scroll";
+import { fileSelector } from "../../../../store/selectors";
+import { handleRemoveFile } from "../../../../store/files/service";
+import { scrollToBottom } from "../../../../utils/scroll";
 
 import { FileListContainer, NoFiles } from "./styles";
 import FileItem from "./FileItem";

@@ -6,12 +6,12 @@ import { handleLoadFiles } from "../../store/files/service";
 import { folderSelector } from "../../store/selectors";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
-import FolderList from "../../containers/FolderList";
 import Header from "../../containers/Header";
-import Files from "../../containers/Files";
-import ActionButtons from "../../containers/ActionButtons";
 
 import { SidebarContainer } from "./styles";
+import FolderList from "./FolderList";
+import Files from "./Files";
+import ActionButtons from "./ActionButtons";
 
 function MainPage() {
   const dispatch = useDispatch();

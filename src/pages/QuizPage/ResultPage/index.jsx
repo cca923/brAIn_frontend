@@ -1,13 +1,8 @@
 import FeedbackCard from "../../../components/FeedbackCard";
+import { PrimaryButton, RowButtonsContainer } from "../../../styles/common";
 import DotNavigation from "../DotNavigation";
 
-import {
-  NavButton,
-  NavigationContainer,
-  ResultContainer,
-  ResultScore,
-  ResultTitle,
-} from "./styles";
+import { ResultContainer, ResultScore, ResultTitle } from "./styles";
 
 const ResultPage = ({
   isSubmitted,
@@ -35,10 +30,10 @@ const ResultPage = ({
         onClick={onNavDotClick}
       />
       <FeedbackCard feedback={feedback} />
-      <NavigationContainer>
-        <NavButton onClick={onEnd}>End Quiz</NavButton>
-        <NavButton onClick={onNewQuiz}>New AI Quiz</NavButton>
-      </NavigationContainer>
+      <RowButtonsContainer width="50%">
+        <PrimaryButton onClick={onEnd}>End Quiz</PrimaryButton>
+        <PrimaryButton onClick={onNewQuiz}>New AI Quiz</PrimaryButton>
+      </RowButtonsContainer>
     </ResultContainer>
   );
 };

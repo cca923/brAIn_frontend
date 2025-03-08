@@ -1,14 +1,15 @@
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import ActionButton from "../../../components/ActionButton";
+import { handleLoadChat } from "../../../store/chat/service";
 
 const ChatButton = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleClick = async () => {
-    // await dispatch(handleLoadQuizzes());
+    await dispatch(handleLoadChat());
     navigate("/chat");
   };
 

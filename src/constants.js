@@ -1,10 +1,15 @@
 export const QUIZ_STATUS = {
-  CORRECT: "CORRECT",
-  WRONG: "WRONG",
-  DEFAULT: "DEFAULT",
+  CORRECT: "correct",
+  WRONG: "wrong",
+  DEFAULT: "default",
 };
 
 export const QUIZ_TYPE = {
   RADIO: "radio",
   BLANK: "text",
+};
+
+export const MSG_TYPE = {
+  SERVER: "server",
+  USER: "user",
 };

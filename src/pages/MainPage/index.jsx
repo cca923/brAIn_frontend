@@ -18,9 +18,8 @@ function MainPage() {
   const { selectedFolderId } = useSelector(folderSelector);
 
   useEffect(() => {
-    // Load folders when component mounts
+    // Load folders "once" when component mounts
     if (!selectedFolderId) {
-      console.log("trigger");
       dispatch(handleLoadFolders({ folderId: selectedFolderId }));
     }
   }, [dispatch, selectedFolderId]);

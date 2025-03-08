@@ -35,8 +35,13 @@ export const handleLoadFolders = createAsyncThunk(
 
 export const handleAddFolder = createAsyncThunk(
   foldersTypes.handleAddFolder,
-  async ({ name }) => {
+  async ({ name }, { getState }) => {
     try {
+      const { folders } = getState();
+      // TODO: api
+      const folderId = folders?.selectedFolderId;
+      console.log("##", { folderId });
+
       // Simulate API call
       await delay(500);
 
@@ -59,8 +64,13 @@ export const handleAddFolder = createAsyncThunk(
 
 export const handleRemoveFolder = createAsyncThunk(
   foldersTypes.handleRemoveFolder,
-  async ({ folderId }) => {
+  async (_, { getState }) => {
     try {
+      const { folders } = getState();
+      // TODO: api
+      const folderId = folders?.selectedFolderId;
+      console.log("##", { folderId });
+
       // Simulate API call
       await delay(500);
 

@@ -27,7 +27,7 @@ function MainPage() {
   useEffect(() => {
     // Load files when current folder changes
     if (selectedFolderId) {
-      dispatch(handleLoadFiles({ folderId: selectedFolderId }));
+      dispatch(handleLoadFiles());
     }
   }, [dispatch, selectedFolderId]);
 

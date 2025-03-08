@@ -9,8 +9,13 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadFiles = createAsyncThunk(
   filesTypes.handleLoadFiles,
-  async ({ folderId }) => {
+  async (_, { getState }) => {
     try {
+      const { folders } = getState();
+      // TODO: api
+      const folderId = folders?.selectedFolderId;
+      console.log("##", { folderId });
+
       // Simulate API call
       await delay(700);
 
@@ -41,11 +46,13 @@ export const handleLoadFiles = createAsyncThunk(
 
 export const handleUploadFile = createAsyncThunk(
   filesTypes.handleUploadFile,
-  async ({ folderId, file }, { dispatch }) => {
-    // TODO: api
-    console.log("##", { folderId });
-
+  async ({ file }, { dispatch, getState }) => {
     try {
+      const { folders } = getState();
+      // TODO: api
+      const folderId = folders?.selectedFolderId;
+      console.log("##", { folderId });
+
       // Validate file type
       const fileType = file.name.split(".").pop().toLowerCase();
       const validTypes = ["pdf", "ppt", "doc", "pptx", "docx"];
@@ -91,11 +98,13 @@ export const handleUploadFile = createAsyncThunk(
 
 export const handleRemoveFile = createAsyncThunk(
   filesTypes.handleRemoveFile,
-  async ({ folderId, fileId }) => {
-    // TODO: api
-    console.log("##", { folderId });
-
+  async ({ fileId }, { getState }) => {
     try {
+      const { folders } = getState();
+      // TODO: api
+      const folderId = folders?.selectedFolderId;
+      console.log("##", { folderId });
+
       // Simulate API call
       await delay(500);
 

@@ -1,9 +1,8 @@
 import { QUIZ_TYPE } from "../../../constants";
 
+import { QuizContainer, QuizTitle, QuizText } from "./styles";
 import RadioQuiz from "./RadioQuiz";
 import BlankQuiz from "./BlankQuiz";
-
-import { QuizContainer, QuizTitle, QuizText } from "./styles";
 
 const QuizQuestion = ({
   className,

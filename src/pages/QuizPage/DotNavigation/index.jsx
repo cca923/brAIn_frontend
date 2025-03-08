@@ -1,8 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 
-import { NavigationContainer, NavDot } from "./styles";
 import { QUIZ_STATUS } from "../../../constants";
+
+import { NavigationContainer, NavDot } from "./styles";
 
 const DotNavigation = ({
   isSubmitted,

@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { handleLoadQuizzes, handleSubmitQuiz } from "./service";
 import { QUIZ_STATUS } from "../../constants";
+
+import { handleLoadQuizzes, handleSubmitQuiz } from "./service";
 
 const initialState = {
   quizzes: [],

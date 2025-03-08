@@ -1,16 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { correctAnswers, quizzes } from "./mockData";
-import { quizType } from "../types";
+import { quizTypes } from "../types";
 import { QUIZ_STATUS } from "../../constants";
+
+import { correctAnswers, quizzes } from "./mockData";
 import { handleUserResult } from "./utils";
 
 // Simulate API delay
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadQuizzes = createAsyncThunk(
-  quizType.handleLoadQuizzes,
+  quizTypes.handleLoadQuizzes,
   async ({ folderId } = {}) => {
+    // TODO: api
+    console.log("##", { folderId });
+
     try {
       // Simulate API call
       await delay(700);
@@ -25,7 +29,7 @@ export const handleLoadQuizzes = createAsyncThunk(
 );
 
 export const handleSubmitQuiz = createAsyncThunk(
-  quizType.handleSubmitQuiz,
+  quizTypes.handleSubmitQuiz,
   async (_, { getState }) => {
     try {
       const { quiz } = getState();

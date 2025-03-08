@@ -1,7 +1,8 @@
 import React from "react";
 
-import { BlankContainer, CorrectAnswer } from "./styles";
 import { QUIZ_STATUS } from "../../../../constants";
+
+import { BlankContainer, CorrectAnswer } from "./styles";
 
 const BlankQuiz = ({
   quizId,

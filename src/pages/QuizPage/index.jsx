@@ -101,7 +101,7 @@ const QuizPage = () => {
           <ResultPage
             isSubmitted={isSubmitted}
             correctCount={correctCount}
-            totalCount={quizzes?.lenght}
+            totalCount={quizzes?.length}
             feedback={feedback}
             quizzes={quizzes}
             selectedQuizIndex={selectedQuizIndex}

@@ -1,7 +1,13 @@
 import FeedbackCard from "../../../components/FeedbackCard";
 import DotNavigation from "../DotNavigation";
 
-import { NavButton, ResultContainer, ResultScore, ResultTitle } from "./styles";
+import {
+  NavButton,
+  NavigationContainer,
+  ResultContainer,
+  ResultScore,
+  ResultTitle,
+} from "./styles";
 
 const ResultPage = ({
   isSubmitted,

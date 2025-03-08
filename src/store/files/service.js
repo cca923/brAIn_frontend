@@ -1,12 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
+import { filesTypes } from "../types";
+
 import { setUploadError } from "./slice";
-import { filesType } from "../types";
 
 // Simulate API delay
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadFiles = createAsyncThunk(
-  filesType.handleLoadFiles,
+  filesTypes.handleLoadFiles,
   async ({ folderId }) => {
     try {
       // Simulate API call
@@ -38,8 +40,11 @@ export const handleLoadFiles = createAsyncThunk(
 );
 
 export const handleUploadFile = createAsyncThunk(
-  filesType.handleUploadFile,
+  filesTypes.handleUploadFile,
   async ({ folderId, file }, { dispatch }) => {
+    // TODO: api
+    console.log("##", { folderId });
+
     try {
       // Validate file type
       const fileType = file.name.split(".").pop().toLowerCase();
@@ -85,8 +90,11 @@ export const handleUploadFile = createAsyncThunk(
 );
 
 export const handleRemoveFile = createAsyncThunk(
-  filesType.handleRemoveFile,
+  filesTypes.handleRemoveFile,
   async ({ folderId, fileId }) => {
+    // TODO: api
+    console.log("##", { folderId });
+
     try {
       // Simulate API call
       await delay(500);

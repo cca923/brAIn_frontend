@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { folderSelector, fileSelector } from "../../../store/selectors";
 import { handleRemoveFile } from "../../../store/files/service";
-
 import { scrollToBottom } from "../../../utils/scroll";
 
 import { FileListContainer, NoFiles } from "./styles";

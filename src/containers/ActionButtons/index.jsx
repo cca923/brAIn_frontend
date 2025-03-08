@@ -1,25 +1,17 @@
-import { ActionButton, ButtonsContainer } from "./styles";
+import SummarizationButton from "../Buttons/SummarizationButton";
+import PastButton from "../Buttons/PastButton";
+import QuizButton from "../Buttons/QuizButton";
+import ChatButton from "../Buttons/ChatButton";
 
-const ActionButtons = () => {
-  const actions = [
-    { id: "summarization", name: "View Summarization", icon: "🔍" },
-    { id: "past-learning", name: "Past Learning", icon: "📚" },
-    { id: "oral-learning", name: "AI Oral Learning", icon: "🎤" },
-    { id: "quiz", name: "AI Quiz", icon: "📝" },
-  ];
+import { ButtonsContainer } from "./styles";
 
-  return (
-    <ButtonsContainer>
-      {actions.map((action) => (
-        <ActionButton
-          key={action.id}
-          onClick={() => console.log(`${action.name} clicked`)}
-        >
-          <span>{action.icon}</span> {action.name}
-        </ActionButton>
-      ))}
-    </ButtonsContainer>
-  );
-};
+const ActionButtons = () => (
+  <ButtonsContainer>
+    <SummarizationButton />
+    <PastButton />
+    <QuizButton />
+    <ChatButton />
+  </ButtonsContainer>
+);
 
 export default ActionButtons;

@@ -8,8 +8,3 @@ export const ButtonsContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.md};
   padding: 0 150px;
 `;
-
-export const ActionButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.white};
-`;

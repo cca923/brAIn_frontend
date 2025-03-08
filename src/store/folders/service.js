@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { foldersType } from "../types";
+
+import { foldersTypes } from "../types";
 
 // Simulate API delay
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadFolders = createAsyncThunk(
-  foldersType.handleLoadFolders,
-  // TODO: change to default one
-  async ({ folderId = "2" } = {}) => {
+  foldersTypes.handleLoadFolders,
+  async ({ folderId } = {}) => {
     try {
       // Simulate API call
       await delay(700);
@@ -34,7 +34,7 @@ export const handleLoadFolders = createAsyncThunk(
 );
 
 export const handleAddFolder = createAsyncThunk(
-  foldersType.handleAddFolder,
+  foldersTypes.handleAddFolder,
   async ({ name }) => {
     try {
       // Simulate API call
@@ -58,7 +58,7 @@ export const handleAddFolder = createAsyncThunk(
 );
 
 export const handleRemoveFolder = createAsyncThunk(
-  foldersType.handleRemoveFolder,
+  foldersTypes.handleRemoveFolder,
   async ({ folderId }) => {
     try {
       // Simulate API call

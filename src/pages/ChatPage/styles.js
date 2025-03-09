@@ -20,9 +20,9 @@ export const Card = styled.div`
 export const MessagesContainer = styled.div`
   flex: 1;
   overflow-y: scroll;
-  padding: ${({ theme }) => theme.spacing.lg};
   display: flex;
   flex-direction: column;
+  padding: ${({ theme }) => theme.spacing.lg};
   gap: ${({ theme }) => theme.spacing.md};
 `;
 

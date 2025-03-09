@@ -4,13 +4,13 @@ import { folderSelector } from "../../store/selectors";
 
 import { HeaderContainer, Title } from "./styles";
 
-const Header = () => {
+const Header = (props) => {
   const { folders, selectedFolderId } = useSelector(folderSelector);
   const selectedFolderIdName =
     folders.find((folder) => folder?.id === selectedFolderId)?.name || "";
 
   return (
-    <HeaderContainer>
+    <HeaderContainer {...props}>
       <Title>{selectedFolderIdName}</Title>
     </HeaderContainer>
   );

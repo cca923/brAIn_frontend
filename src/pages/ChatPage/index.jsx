@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 import { scrollToBottom } from "../../utils/scroll";
 import { MSG_TYPE } from "../../constants";
+import useChatMode from "../../hooks/useChatMode";
 import { handleLoadChat } from "../../store/chat/service";
 import { resetChat } from "../../store/chat/slice";
 import { chatSelector } from "../../store/selectors";
 import FeedbackCard from "../../components/FeedbackCard";
-import useChatMode from "../../hooks/useChatMode";
+import Header from "../../containers/Header";
 
 import {
   PageContainer,
@@ -25,6 +26,7 @@ import EndChat from "./EndChat";
 
 const ChatPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     chatInputRef,
     inputMessage,
@@ -38,22 +40,13 @@ const ChatPage = () => {
     onSend,
     onKeyPress,
   } = useChatMode();
-  const navigate = useNavigate();
-
   const messagesEndRef = useRef(null);
-
   const { messages, loadingMap, feedback } = useSelector(chatSelector);
 
   const handleEndChat = () => {
     dispatch(resetChat());
     navigate("/");
   };
-
-  useEffect(() => {
-    if (messages && messagesEndRef?.current) {
-      scrollToBottom(messagesEndRef?.current);
-    }
-  }, [messages]);
 
   const handleNewChat = () => {
     dispatch(resetChat());
@@ -94,9 +87,16 @@ const ChatPage = () => {
     );
   };
 
+  useEffect(() => {
+    if (messages && messagesEndRef?.current) {
+      scrollToBottom(messagesEndRef?.current);
+    }
+  }, [messages]);
+
   return (
     <PageContainer>
       <Card>
+        <Header m="24px" />
         <MessagesContainer ref={messagesEndRef}>
           {messages?.map((msg, index) => (
             <Message key={index} {...msg} />

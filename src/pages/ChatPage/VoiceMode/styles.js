@@ -1,4 +1,35 @@
 import styled from "styled-components";
+import { variant } from "styled-system";
+
+import { Button } from "../../../styles/common";
+import CommonButton from "../CommonButton";
+
+export const RecordButton = styled(CommonButton)`
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  ${({ theme }) =>
+    variant({
+      variants: {
+        default: {
+          backgroundColor: theme.colors.gray,
+        },
+        danger: {
+          backgroundColor: theme.colors.danger,
+          animation: "pulse 1s infinite ease-in-out",
+        },
+      },
+    })}
+`;
 
 export const RecordPrompt = styled.div`
   flex: 1;

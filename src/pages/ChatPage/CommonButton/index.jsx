@@ -2,8 +2,8 @@ import { Icon } from "../../../styles/common";
 
 import { ButtonContainer } from "./styles";
 
-const CommonButton = ({ variant, onClick, disabled, iconComponent }) => (
-  <ButtonContainer variant={variant} onClick={onClick} disabled={disabled}>
+const CommonButton = ({ onClick, disabled, iconComponent, ...rest }) => (
+  <ButtonContainer onClick={onClick} disabled={disabled} {...rest}>
     <Icon>{iconComponent}</Icon>
   </ButtonContainer>
 );

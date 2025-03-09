@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { variant } from "styled-system";
 
 import { Button } from "../../../styles/common";
 
@@ -17,16 +16,4 @@ export const ButtonContainer = styled(Button)`
     background-color: ${({ theme }) => theme.colors.gray};
     cursor: not-allowed;
   }
-
-  ${({ theme }) =>
-    variant({
-      variants: {
-        danger: {
-          backgroundColor: theme.colors.danger,
-        },
-        success: {
-          backgroundColor: theme.colors.success,
-        },
-      },
-    })}
 `;

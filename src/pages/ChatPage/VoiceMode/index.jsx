@@ -1,12 +1,11 @@
-import { FaStop, FaRecordVinyl } from "react-icons/fa6";
+import { FaStop } from "react-icons/fa6";
 import { LuSend } from "react-icons/lu";
-import { MdFiberManualRecord } from "react-icons/md";
-import { BsKeyboard } from "react-icons/bs";
+import { BsRecordCircle, BsKeyboard } from "react-icons/bs";
 
 import { Icon } from "../../../styles/common";
 import CommonButton from "../CommonButton";
 
-import { RecordPrompt, RightButtonsContainer } from "./styles";
+import { RecordButton, RecordPrompt, RightButtonsContainer } from "./styles";
 
 const VoiceMode = ({
   voiceToTextMode,
@@ -22,10 +21,10 @@ const VoiceMode = ({
 
   return (
     <>
-      <CommonButton
-        variant={isRecording ? "success" : "danger"}
+      <RecordButton
+        variant={isRecording ? "danger" : "default"}
         onClick={toggleRecording}
-        iconComponent={isRecording ? <FaStop /> : <MdFiberManualRecord />}
+        iconComponent={isRecording ? <FaStop /> : <BsRecordCircle />}
       />
 
       <RecordPrompt>{displayPrompt}</RecordPrompt>

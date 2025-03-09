@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Button } from "../../styles/common";
+import { Button } from "../../../styles/common";
 
 export const FolderListContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.light};

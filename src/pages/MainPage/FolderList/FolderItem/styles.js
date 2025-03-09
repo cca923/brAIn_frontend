@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { RemoveButton } from "../../../styles/common";
+
+import { RemoveButton } from "../../../../styles/common";
 
 export const FolderItemContainer = styled.div`
   padding: ${({ theme }) => theme.spacing.md};

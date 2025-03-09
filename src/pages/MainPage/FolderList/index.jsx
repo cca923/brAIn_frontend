@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { scrollToBottom } from "../../utils/scroll";
-import { toggleAddFolder } from "../../store/folders/slice";
-import { folderSelector } from "../../store/selectors";
+import { scrollToBottom } from "../../../utils/scroll";
+import { toggleAddFolder } from "../../../store/folders/slice";
+import { folderSelector } from "../../../store/selectors";
 import {
   handleAddFolder,
   handleLoadFolders,
   handleRemoveFolder,
-} from "../../store/folders/service";
+} from "../../../store/folders/service";
 
 import {
   AddFolderButton,

@@ -8,9 +8,7 @@ const initialState = {
   quizzes: [],
   selectedQuizIndex: 0,
   userAnswersMap: {
-    /*
-    quizId:{ answer, status: QUIZ_STATUS, correctAnswer }
-    */
+    // quizId: { answer, status: QUIZ_STATUS, correctAnswer }
   },
   correctCount: 0,
   feedback: "",

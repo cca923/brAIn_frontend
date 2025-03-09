@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Button } from "../../../styles/common";
+
+import { Button } from "../../../../styles/common";
 
 export const UploaderContainer = styled.div`
   display: flex;

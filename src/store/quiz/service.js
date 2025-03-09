@@ -11,11 +11,13 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadQuizzes = createAsyncThunk(
   quizTypes.handleLoadQuizzes,
-  async ({ folderId } = {}) => {
-    // TODO: api
-    console.log("##", { folderId });
-
+  async (_, { getState }) => {
     try {
+      const { folders } = getState();
+      // TODO: api
+      const folderId = folders?.selectedFolderId;
+      console.log("##", { folderId });
+
       // Simulate API call
       await delay(700);
 
@@ -32,8 +34,13 @@ export const handleSubmitQuiz = createAsyncThunk(
   quizTypes.handleSubmitQuiz,
   async (_, { getState }) => {
     try {
-      const { quiz } = getState();
+      const { folders, quiz } = getState();
       const { quizzes, userAnswersMap } = quiz;
+
+      // TODO: api
+      const folderId = folders?.selectedFolderId;
+      console.log("##", { folderId });
+
       // Simulate API call
       await delay(1500);
 

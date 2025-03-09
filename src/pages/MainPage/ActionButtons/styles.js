@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Button } from "../../styles/common";
+import { Button } from "../../../styles/common";
 
 export const ButtonsContainer = styled.div`
   display: grid;

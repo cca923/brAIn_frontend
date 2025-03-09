@@ -1,6 +1,8 @@
 import React from "react";
 
-import { NavigationContainer, NavButton } from "./styles";
+import { RowButtonsContainer } from "../../../styles/common";
+
+import { NavButton } from "./styles";
 
 const ButtonNavigation = ({
   isSubmitted,
@@ -10,7 +12,7 @@ const ButtonNavigation = ({
   onNextClick,
   onSubmit,
 }) => (
-  <NavigationContainer>
+  <RowButtonsContainer width="50%" mb="40px">
     <NavButton onClick={onPrevClick} disabled={isPrevBtnDisabled}>
       Previous Quiz
     </NavButton>
@@ -21,7 +23,7 @@ const ButtonNavigation = ({
     ) : (
       <NavButton onClick={onNextClick}>Next Quiz</NavButton>
     )}
-  </NavigationContainer>
+  </RowButtonsContainer>
 );
 
 export default ButtonNavigation;

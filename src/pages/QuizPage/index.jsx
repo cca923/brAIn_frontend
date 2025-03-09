@@ -11,7 +11,7 @@ import {
   resetQuiz,
 } from "../../store/quiz/slice";
 import { handleLoadQuizzes, handleSubmitQuiz } from "../../store/quiz/service";
-import { folderSelector, quizSelector } from "../../store/selectors";
+import { quizSelector } from "../../store/selectors";
 import Header from "../../containers/Header";
 import { QUIZ_TYPE } from "../../constants";
 
@@ -25,7 +25,6 @@ import ResultPage from "./ResultPage";
 const QuizPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { selectedFolderId } = useSelector(folderSelector);
 
   const {
     quizzes,
@@ -89,7 +88,7 @@ const QuizPage = () => {
 
   const handleNewQuiz = () => {
     dispatch(resetQuiz());
-    dispatch(handleLoadQuizzes({ folderId: selectedFolderId }));
+    dispatch(handleLoadQuizzes());
     setIsViewQuiz(true);
   };
 

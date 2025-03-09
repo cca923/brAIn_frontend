@@ -12,7 +12,7 @@ function App() {
   const isLoading = useSelector(isPageLoadingSelector);
 
   return (
-    <>
+    <div style={{ maxWidth: "1200px", minHeight: "100vh", margin: "0 auto" }}>
       {isLoading && <Loading />}
       <Routes>
         <Route path="/" element={<MainPage />} />
@@ -20,7 +20,7 @@ function App() {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/quiz" element={<QuizPage />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

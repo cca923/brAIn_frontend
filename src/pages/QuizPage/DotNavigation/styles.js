@@ -41,8 +41,7 @@ export const NavDot = styled.button`
   }
 
   &:hover {
-    background-color: ${({ active, theme }) =>
-      active ? theme.colors.primary : theme.colors.secondary};
+    background-color: ${({ theme }) => theme.colors.secondary};
     color: ${({ theme }) => theme.colors.white};
   }
 `;

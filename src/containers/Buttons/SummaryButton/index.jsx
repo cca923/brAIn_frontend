@@ -2,22 +2,22 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import ActionButton from "../../../components/ActionButton";
-import { handleLoadQuizzes } from "../../../store/quiz/service";
+import { handleLoadSummary } from "../../../store/summary/service";
 
-const QuizButton = () => {
+const SummaryButton = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    await dispatch(handleLoadQuizzes());
-    navigate("/quiz");
+    await dispatch(handleLoadSummary());
+    navigate("/summary");
   };
 
   return (
     <ActionButton onClick={handleClick}>
-      <span>📝</span> AI Quiz
+      <span>🔍</span> View Summary
     </ActionButton>
   );
 };
 
-export default QuizButton;
+export default SummaryButton;

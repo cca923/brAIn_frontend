@@ -5,8 +5,8 @@ import ActionButton from "../../../components/ActionButton";
 import { handleLoadChat } from "../../../store/chat/service";
 
 const ChatButton = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     await dispatch(handleLoadChat());

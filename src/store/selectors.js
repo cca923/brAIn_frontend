@@ -2,6 +2,8 @@ export const folderSelector = (state) => state.folders;
 
 export const fileSelector = (state) => state.files;
 
+export const summarySelector = (state) => state.summary;
+
 export const quizSelector = (state) => state.quiz;
 
 export const chatSelector = (state) => state.chat;

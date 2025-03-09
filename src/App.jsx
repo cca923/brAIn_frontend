@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { isPageLoadingSelector } from "./store/selectors";
 import Loading from "./components/Loading";
 import MainPage from "./pages/MainPage";
-import SummarizationPage from "./pages/SummarizationPage";
+import SummaryButton from "./pages/SummaryPage";
 import ChatPage from "./pages/ChatPage";
 import QuizPage from "./pages/QuizPage";
 
@@ -24,7 +24,7 @@ function App() {
       {isLoading && <Loading />}
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/summarization" element={<SummarizationPage />} />
+        <Route path="/summary" element={<SummaryButton />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/quiz" element={<QuizPage />} />
       </Routes>

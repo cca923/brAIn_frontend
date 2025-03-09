@@ -19,3 +19,7 @@ export const chatTypes = {
   handleLoadChat: "chat/handleLoadChat",
   handleSendMessage: "chat/handleSendMessage",
 };
+
+export const summaryTypes = {
+  handleLoadSummary: "summary/handleLoadSummary",
+};

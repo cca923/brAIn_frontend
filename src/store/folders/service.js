@@ -38,7 +38,7 @@ export const handleAddFolder = createAsyncThunk(
   async ({ name }, { getState }) => {
     try {
       const { folders } = getState();
-      // TODO: api
+      // TODO: api / handle same name alert
       const folderId = folders?.selectedFolderId;
       console.log("##", { folderId });
 

@@ -12,7 +12,15 @@ function App() {
   const isLoading = useSelector(isPageLoadingSelector);
 
   return (
-    <div style={{ maxWidth: "1200px", minHeight: "100vh", margin: "0 auto" }}>
+    <div
+      style={{
+        maxWidth: "1200px",
+        minWidth: "760px",
+        minHeight: "100vh",
+        margin: "0 auto",
+        overflow: "auto",
+      }}
+    >
       {isLoading && <Loading />}
       <Routes>
         <Route path="/" element={<MainPage />} />

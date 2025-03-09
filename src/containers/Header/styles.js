@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { space } from "styled-system";
 
 export const HeaderContainer = styled.header`
   height: 40px;
   display: flex;
   align-items: center;
   margin-bottom: ${({ theme }) => theme.spacing.lg};
+  ${space};
 `;
 
 export const Title = styled.h1`
@@ -13,4 +15,5 @@ export const Title = styled.h1`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  margin: 0;
 `;

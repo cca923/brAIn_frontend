@@ -1,0 +1,80 @@
+export const mockData = [
+  {
+    type: "AI Chat",
+    date: "2025-03-08",
+    timeSpending: "8mins",
+    score: "",
+  },
+  {
+    type: "AI Chat",
+    date: "2025-03-07",
+    timeSpending: "13mins",
+    score: "",
+  },
+  {
+    type: "AI Quiz",
+    date: "2025-03-06",
+    timeSpending: "15mins",
+    score: "3/10",
+  },
+  {
+    type: "AI Quiz",
+    date: "2025-03-05",
+    timeSpending: "30mins",
+    score: "7/10",
+  },
+  {
+    type: "AI Quiz",
+    date: "2025-03-05",
+    timeSpending: "11mins",
+    score: "10/10",
+  },
+  {
+    type: "AI Chat",
+    date: "2025-03-04",
+    timeSpending: "13mins",
+    score: "",
+  },
+  {
+    type: "AI Chat",
+    date: "2025-03-03",
+    timeSpending: "20mins",
+    score: "",
+  },
+  {
+    type: "AI Chat",
+    date: "2025-03-02",
+    timeSpending: "14mins",
+    score: "",
+  },
+  {
+    type: "AI Chat",
+    date: "2025-02-28",
+    timeSpending: "13mins",
+    score: "",
+  },
+  {
+    type: "AI Quiz",
+    date: "2025-02-13",
+    timeSpending: "20mins",
+    score: "4/10",
+  },
+  {
+    type: "AI Chat",
+    date: "2025-01-31",
+    timeSpending: "15mins",
+    score: "",
+  },
+  {
+    type: "AI Quiz",
+    date: "2025-01-11",
+    timeSpending: "13mins",
+    score: "8/10",
+  },
+  {
+    type: "AI Chat",
+    date: "2025-01-09",
+    timeSpending: "9mins",
+    score: "",
+  },
+];

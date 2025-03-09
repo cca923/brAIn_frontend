@@ -1,28 +1,28 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { IoIosSearch } from "react-icons/io";
 
 import ActionButton from "../../../components/ActionButton";
 import { Icon } from "../../../styles/common";
-import { handleLoadChat } from "../../../store/chat/service";
+import { handleLoadSummary } from "../../../store/summary/service";
 
-const ChatButton = () => {
+const SummaryButton = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    await dispatch(handleLoadChat());
-    navigate("/chat");
+    await dispatch(handleLoadSummary());
+    navigate("/summary");
   };
 
   return (
     <ActionButton onClick={handleClick}>
       <Icon fontSize="20px" mr="5px">
-        <IoChatboxEllipsesOutline />
+        <IoIosSearch />
       </Icon>
-      AI Chat
+      View Summary
     </ActionButton>
   );
 };
 
-export default ChatButton;
+export default SummaryButton;

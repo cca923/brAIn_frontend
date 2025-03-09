@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { IoAddCircle } from "react-icons/io5";
 
 import { scrollToBottom } from "../../../utils/scroll";
 import { toggleAddFolder } from "../../../store/folders/slice";
@@ -9,6 +10,7 @@ import {
   handleLoadFolders,
   handleRemoveFolder,
 } from "../../../store/folders/service";
+import { Icon } from "../../../styles/common";
 
 import {
   AddFolderButton,
@@ -42,8 +44,17 @@ const FolderList = () => {
   };
 
   const handleConfirmAddFolder = () => {
-    if (newFolderName.trim()) {
-      dispatch(handleAddFolder({ name: newFolderName.trim() }));
+    const folderName = newFolderName.trim();
+    if (folderName) {
+      const folderExists = folders?.some(
+        (folder) => folder.name.toLowerCase() === folderName.toLowerCase()
+      );
+      if (folderExists) {
+        alert("Folder with the same name already exists!");
+        return;
+      }
+
+      return dispatch(handleAddFolder({ name: folderName }));
     }
   };
 
@@ -89,7 +100,10 @@ const FolderList = () => {
         </AddFolderInput>
       ) : (
         <AddFolderButton onClick={handleAddFolderClick}>
-          + Add New Folder
+          <Icon fontSize="20px" mr="5px">
+            <IoAddCircle />
+          </Icon>
+          Add New Folder
         </AddFolderButton>
       )}
     </FolderListContainer>

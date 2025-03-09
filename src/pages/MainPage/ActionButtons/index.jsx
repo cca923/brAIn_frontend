@@ -1,4 +1,4 @@
-import SummarizationButton from "../../../containers/Buttons/SummarizationButton";
+import SummaryButton from "../../../containers/Buttons/SummaryButton";
 import PastButton from "../../../containers/Buttons/PastButton";
 import QuizButton from "../../../containers/Buttons/QuizButton";
 import ChatButton from "../../../containers/Buttons/ChatButton";
@@ -7,7 +7,7 @@ import { ButtonsContainer } from "./styles";
 
 const ActionButtons = () => (
   <ButtonsContainer>
-    <SummarizationButton />
+    <SummaryButton />
     <PastButton />
     <QuizButton />
     <ChatButton />

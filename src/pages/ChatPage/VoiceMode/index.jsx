@@ -17,7 +17,7 @@ const VoiceMode = ({
   const recordingPrompt = transcript || "Listening...";
   const displayPrompt = isRecording
     ? recordingPrompt
-    : transcript || "Click the icon, then start speaking!";
+    : transcript || "Click the icon and start speaking!";
 
   return (
     <>

@@ -23,6 +23,9 @@ export const FolderListContainer = styled.div`
 
 export const AddFolderButton = styled(Button)`
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: ${({ theme }) => theme.colors.secondary}50;
   color: ${({ theme }) => theme.colors.primary};
   margin-top: ${({ theme }) => theme.spacing.md};

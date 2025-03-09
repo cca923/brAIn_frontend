@@ -4,17 +4,22 @@ import { fetchFolders, postAddFolder, deleteRemoveFolder } from "../../apis";
 import { addToast } from "../toast/slice";
 import { foldersTypes } from "../types";
 import { idFormatter } from "../utils";
+import { handleLoadFiles } from "../files/service";
 
 export const handleLoadFolders = createAsyncThunk(
   foldersTypes.handleLoadFolders,
-  async ({ folderId } = {}) => {
+  async (_, { dispatch }) => {
     try {
       const response = await fetchFolders();
       const folders = idFormatter(response);
 
+      // Load default files depends on folderId
+      const selectedFolderId = folders?.[0]?.id;
+      await dispatch(handleLoadFiles({ folderId: selectedFolderId }));
+
       return {
-        folderId,
         folders,
+        selectedFolderId,
       };
     } catch (error) {
       return Promise.reject(error.message);

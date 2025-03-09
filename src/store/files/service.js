@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { filesTypes } from "../types";
+import { fetchFiles } from "../../apis";
+import { idFormatter } from "../utils";
+import { setSelectedFolderId } from "../folders/slice";
 
 import { setUploadError } from "./slice";
 
@@ -9,31 +12,13 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadFiles = createAsyncThunk(
   filesTypes.handleLoadFiles,
-  async (_, { getState }) => {
+  async ({ folderId }, { dispatch }) => {
     try {
-      const { folders } = getState();
-      // TODO: api
-      const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId });
+      const response = await fetchFiles({ folderId });
+      const files = idFormatter(response);
 
-      // Simulate API call
-      await delay(700);
-
-      // You could make a real API call here:
-      // const response = await fetch(`/api/folders/${folderId}/files`);
-      // const data = await response.json();
-
-      // For now, return mock data based on folder ID
-      let files = [];
-
-      if (folderId === "2") {
-        files = [
-          { id: "1", name: "File 1", type: "pdf" },
-          { id: "2", name: "File 2", type: "ppt" },
-          { id: "3", name: "File 3", type: "doc" },
-          { id: "4", name: "File 4", type: "pdf" },
-        ];
-      }
+      // Switch to this folder after successfully loads its files
+      dispatch(setSelectedFolderId({ folderId }));
 
       return {
         files,

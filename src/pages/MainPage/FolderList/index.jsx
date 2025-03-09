@@ -8,9 +8,9 @@ import { toggleAddFolder } from "../../../store/folders/slice";
 import { folderSelector } from "../../../store/selectors";
 import {
   handleAddFolder,
-  handleLoadFolders,
   handleRemoveFolder,
 } from "../../../store/folders/service";
+import { handleLoadFiles } from "../../../store/files/service";
 import { Icon } from "../../../styles/common";
 
 import {
@@ -32,7 +32,7 @@ const FolderList = () => {
   const prevFolderLength = useRef(folders.length); // Keep track of previous length of the folder list
 
   const handleFolderClick = ({ id }) => {
-    dispatch(handleLoadFolders({ folderId: id }));
+    dispatch(handleLoadFiles({ folderId: id }));
   };
 
   const handleFolderRemove = ({ id }) => {

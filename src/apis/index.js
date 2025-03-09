@@ -13,7 +13,8 @@ export const postAddFolder = ({ name }) =>
 export const deleteRemoveFolder = ({ folderId }) =>
   deleteApiRequest({ endpoint: `api/folders/${folderId}` });
 
-export const fetchFiles = () => fetchApiRequest({ endpoint: "api/files" });
+export const fetchFiles = ({ folderId }) =>
+  fetchApiRequest({ endpoint: `api/files/${folderId}` });
 
 export const postUploadFile = () =>
   postApiFormDataRequest({ endpoint: "api/files" });

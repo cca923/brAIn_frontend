@@ -14,6 +14,7 @@ export const Card = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.md};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: ${({ theme }) => theme.spacing.lg};
+  position: relative;
 `;
 
 export const SummaryContainer = styled.div`

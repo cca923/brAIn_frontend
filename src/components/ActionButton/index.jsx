@@ -12,7 +12,12 @@ const ActionButton = ({
   };
 
   return (
-    <ButtonContainer onClick={handleClick} type={type} disabled={disabled}>
+    <ButtonContainer
+      onClick={handleClick}
+      type={type}
+      disabled={disabled}
+      {...rest}
+    >
       {children}
     </ButtonContainer>
   );

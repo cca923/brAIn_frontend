@@ -20,7 +20,7 @@ const ResultPage = ({
     <ResultContainer>
       <ResultTitle>Quiz Results</ResultTitle>
       <ResultScore>
-        Correct: <span>{correctCount || 0}</span>/{totalCount || 0}
+        Score: <span>{correctCount || 0}</span>/{totalCount || 0}
       </ResultScore>
       <DotNavigation
         isSubmitted={isSubmitted}

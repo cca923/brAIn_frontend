@@ -1,11 +1,13 @@
+import { IoMdExit } from "react-icons/io";
 import { useSelector } from "react-redux";
 import ReactMarkdown from "react-markdown";
 
-import Header from "../../containers/Header";
 import { summarySelector } from "../../store/selectors";
-import { RowButtonsContainer } from "../../styles/common";
+import { RowButtonsContainer, Icon } from "../../styles/common";
+import Header from "../../containers/Header";
 import QuizButton from "../../containers/Buttons/QuizButton";
 import ChatButton from "../../containers/Buttons/ChatButton";
+import ExitButton from "../../containers/Buttons/ExitButton";
 
 import { PageContainer, Card, SummaryContainer, Summary } from "./styles";
 
@@ -16,6 +18,7 @@ const SummaryPage = () => {
     <PageContainer>
       <Card>
         <Header />
+        <ExitButton />
         <SummaryContainer>
           <Summary>
             <ReactMarkdown>{summary}</ReactMarkdown>

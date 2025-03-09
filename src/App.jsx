@@ -7,6 +7,7 @@ import MainPage from "./pages/MainPage";
 import SummaryButton from "./pages/SummaryPage";
 import ChatPage from "./pages/ChatPage";
 import QuizPage from "./pages/QuizPage";
+import PastPage from "./pages/PastPage";
 
 function App() {
   const isLoading = useSelector(isPageLoadingSelector);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/summary" element={<SummaryButton />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/past" element={<PastPage />} />
       </Routes>
     </div>
   );

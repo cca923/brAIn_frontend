@@ -19,6 +19,7 @@ export const RecordButton = styled(CommonButton)`
 
   ${({ theme }) =>
     variant({
+      prop: "type",
       variants: {
         default: {
           backgroundColor: theme.colors.gray,

@@ -56,15 +56,10 @@ const folderSlice = createSlice({
         state.error = null;
       })
       .addCase(handleAddFolder.fulfilled, (state, action) => {
-        const { name } = action.payload;
-        const newFolder = {
-          id: Date.now().toString(),
-          name,
-          selected: false,
-        };
+        const { folder } = action.payload;
 
         state.loadingMap.addFolder = false;
-        state.folders.push(newFolder);
+        state.folders = [...state.folders, folder];
         state.isAddingFolder = false;
       })
       .addCase(handleAddFolder.rejected, (state, action) => {

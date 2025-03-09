@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { IoAddCircle } from "react-icons/io5";
 
 import { scrollToBottom } from "../../../utils/scroll";
+import { addToast } from "../../../store/toast/slice";
 import { toggleAddFolder } from "../../../store/folders/slice";
 import { folderSelector } from "../../../store/selectors";
 import {
@@ -50,7 +51,12 @@ const FolderList = () => {
         (folder) => folder.name.toLowerCase() === folderName.toLowerCase()
       );
       if (folderExists) {
-        alert("Folder with the same name already exists!");
+        dispatch(
+          addToast({
+            message: "Folder with the same name already exists!",
+            type: "error",
+          })
+        );
         return;
       }
 

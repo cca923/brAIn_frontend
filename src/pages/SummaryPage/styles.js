@@ -30,3 +30,8 @@ export const Summary = styled.div`
   padding: 0 100px 40px;
   white-space: pre-wrap;
 `;
+
+export const Alert = styled.h2`
+  color: ${({ theme }) => theme.colors.danger};
+  text-align: center;
+`;

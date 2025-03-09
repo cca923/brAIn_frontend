@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import { isPageLoadingSelector } from "./store/selectors";
 import Loading from "./components/Loading";
+import Toast from "./components/Toast";
 import MainPage from "./pages/MainPage";
 import SummaryButton from "./pages/SummaryPage";
 import ChatPage from "./pages/ChatPage";
@@ -23,6 +24,7 @@ function App() {
       }}
     >
       {isLoading && <Loading />}
+      <Toast />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/summary" element={<SummaryButton />} />

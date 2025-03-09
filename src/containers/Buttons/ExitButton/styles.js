@@ -9,7 +9,4 @@ export const ButtonContainer = styled(ActionButton)`
   border-radius: 50%;
   max-width: 60px;
   height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;

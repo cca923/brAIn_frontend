@@ -1,7 +1,9 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 
 import ActionButton from "../../../components/ActionButton";
+import { Icon } from "../../../styles/common";
 import { handleLoadChat } from "../../../store/chat/service";
 
 const ChatButton = () => {
@@ -15,7 +17,10 @@ const ChatButton = () => {
 
   return (
     <ActionButton onClick={handleClick}>
-      <span>🎤</span> AI Chat
+      <Icon fontSize="20px" mr="5px">
+        <IoChatboxEllipsesOutline />
+      </Icon>
+      AI Chat
     </ActionButton>
   );
 };

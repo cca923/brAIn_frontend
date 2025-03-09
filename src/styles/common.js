@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { layout, space } from "styled-system";
+import { layout, space, typography } from "styled-system";
 
 export const Button = styled.button`
   flex: 1;
@@ -40,8 +40,10 @@ export const PrimaryButton = styled(Button)`
 `;
 
 export const Icon = styled.span`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 30px;
+  ${typography};
+  ${space};
 `;

@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { IoCloudUploadSharp } from "react-icons/io5";
 
 import { handleUploadFile } from "../../../../store/files/service";
 import { fileSelector } from "../../../../store/selectors";
+import { Icon } from "../../../../styles/common";
 
 import {
   UploaderContainer,
@@ -45,7 +47,11 @@ const FileUploader = () => {
   return (
     <UploaderContainer>
       <UploadButton onClick={handleUploadClick} disabled={isUploading}>
-        <span>↑</span> {isUploading ? "Uploading..." : "Upload New File"}
+        <Icon fontSize="20px">
+          <IoCloudUploadSharp />
+        </Icon>
+
+        {isUploading ? "Uploading..." : "Upload New File"}
       </UploadButton>
       <HiddenInput
         type="file"

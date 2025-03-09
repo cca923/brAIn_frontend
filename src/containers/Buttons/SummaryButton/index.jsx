@@ -1,7 +1,9 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { IoIosSearch } from "react-icons/io";
 
 import ActionButton from "../../../components/ActionButton";
+import { Icon } from "../../../styles/common";
 import { handleLoadSummary } from "../../../store/summary/service";
 
 const SummaryButton = () => {
@@ -15,7 +17,10 @@ const SummaryButton = () => {
 
   return (
     <ActionButton onClick={handleClick}>
-      <span>🔍</span> View Summary
+      <Icon fontSize="20px" mr="5px">
+        <IoIosSearch />
+      </Icon>
+      View Summary
     </ActionButton>
   );
 };

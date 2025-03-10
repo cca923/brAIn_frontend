@@ -4,14 +4,15 @@ import { IoChatboxEllipsesOutline } from "react-icons/io5";
 
 import ActionButton from "../../../components/ActionButton";
 import { Icon } from "../../../styles/common";
-import { handleLoadChat } from "../../../store/chat/service";
+import { handleStartChat } from "../../../store/chat/service";
 
 const ChatButton = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleClick = async () => {
-    await dispatch(handleLoadChat());
+  const handleClick = () => {
+    // No need to await, chat page has loading ui
+    dispatch(handleStartChat());
     navigate("/chat");
   };
 

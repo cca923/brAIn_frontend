@@ -9,7 +9,7 @@ export const quizSelector = (state) => state.quiz;
 export const chatSelector = (state) => state.chat;
 
 export const isPageLoadingSelector = (state) => {
-  const { folders, files, summary, quiz, chat } = state;
+  const { folders, files, summary, quiz } = state;
 
   const loadingStates = [
     folders?.loadingMap?.loadFolders,
@@ -18,7 +18,6 @@ export const isPageLoadingSelector = (state) => {
     summary?.loadingMap?.loadSummary,
     quiz?.loadingMap?.loadQuizzes,
     quiz?.loadingMap?.submitQuiz,
-    chat?.loadingMap?.loadChat,
   ];
 
   return loadingStates.some((loadingState) => loadingState === true);

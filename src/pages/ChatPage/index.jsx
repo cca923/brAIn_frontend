@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { scrollToBottom } from "../../utils/scroll";
 import { MSG_TYPE } from "../../constants";
 import useChatMode from "../../hooks/useChatMode";
-import { handleLoadChat } from "../../store/chat/service";
+import { handleStartChat } from "../../store/chat/service";
 import { resetChat } from "../../store/chat/slice";
 import { chatSelector } from "../../store/selectors";
 import FeedbackCard from "../../components/FeedbackCard";
@@ -42,6 +42,7 @@ const ChatPage = () => {
   } = useChatMode();
   const messagesEndRef = useRef(null);
   const { messages, loadingMap, feedback } = useSelector(chatSelector);
+  const isLoading = loadingMap?.startChat || loadingMap?.sendMessage;
 
   const handleEndChat = () => {
     dispatch(resetChat());
@@ -50,7 +51,7 @@ const ChatPage = () => {
 
   const handleNewChat = () => {
     dispatch(resetChat());
-    dispatch(handleLoadChat());
+    dispatch(handleStartChat());
   };
 
   const renderInput = () => {
@@ -71,6 +72,7 @@ const ChatPage = () => {
           toggleRecording={toggleRecording}
           onSend={onSend}
           transcript={transcript}
+          disabled={isLoading}
         />
       );
     }
@@ -83,6 +85,7 @@ const ChatPage = () => {
         onInputChange={onInputChange}
         onKeyPress={onKeyPress}
         onSend={onSend}
+        disabled={isLoading}
       />
     );
   };
@@ -101,9 +104,7 @@ const ChatPage = () => {
           {messages?.map((msg, index) => (
             <Message key={index} {...msg} />
           ))}
-          {loadingMap?.sendMessage && (
-            <Message type={MSG_TYPE.SERVER} message="Typing..." />
-          )}
+          {isLoading && <Message type={MSG_TYPE.SERVER} message="Typing..." />}
         </MessagesContainer>
 
         <InputContainer>{renderInput()}</InputContainer>

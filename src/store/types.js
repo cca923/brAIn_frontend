@@ -16,7 +16,7 @@ export const quizTypes = {
 };
 
 export const chatTypes = {
-  handleLoadChat: "chat/handleLoadChat",
+  handleStartChat: "chat/handleStartChat",
   handleSendMessage: "chat/handleSendMessage",
 };
 

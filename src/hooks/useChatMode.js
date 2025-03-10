@@ -9,6 +9,7 @@ const useChatMode = () => {
 
   const chatInputRef = useRef(null);
   const recognitionRef = useRef(null);
+  const ignoreResultsRef = useRef(false);
 
   const [inputMessage, setInputMessage] = useState("");
   const [isVoiceMode, setIsVoiceMode] = useState(false);
@@ -41,10 +42,6 @@ const useChatMode = () => {
         setIsRecording(false);
         // stop the recognition
         recognitionRef?.current.stop();
-
-        if (transcript.trim()) {
-          setInputMessage(transcript);
-        }
       } catch (error) {
         console.error("Failed to stop recognition:", error);
       }
@@ -71,22 +68,32 @@ const useChatMode = () => {
   const voiceToTextMode = () => {
     setIsVoiceMode(false);
     stopRecording();
+    if (transcript?.trim()) {
+      setInputMessage(transcript);
+    }
   };
 
   // Send Message
   const handleSend = () => {
     const messageToSend = isVoiceMode ? transcript.trim() : inputMessage.trim();
+    if (!messageToSend) return;
 
-    if (messageToSend) {
-      dispatch(setUserMessage({ message: messageToSend }));
-      dispatch(handleSendMessage({ message: messageToSend }));
-      setInputMessage("");
-      setTranscript("");
+    // Set the flag to ignore further results
+    ignoreResultsRef.current = true;
 
-      if (isRecording) {
-        stopRecording();
-      }
+    if (isRecording) {
+      stopRecording();
     }
+    dispatch(setUserMessage({ message: messageToSend }));
+    dispatch(handleSendMessage({ message: messageToSend }));
+    setInputMessage("");
+
+    setTranscript("");
+
+    // Reset the flag after a short delay
+    setTimeout(() => {
+      ignoreResultsRef.current = false;
+    }, 500);
   };
 
   const handleKeyPress = (e) => {
@@ -106,9 +113,12 @@ const useChatMode = () => {
       recognition.interimResults = true;
 
       recognition.onresult = (event) => {
-        const current = event.resultIndex;
-        const transcriptText = event.results[current][0].transcript;
-        setTranscript(transcriptText);
+        // Only update transcript if we're not ignoring results
+        if (!ignoreResultsRef.current) {
+          const current = event.resultIndex;
+          const transcriptText = event.results[current][0].transcript;
+          setTranscript(transcriptText);
+        }
       };
 
       recognition.onend = () => {

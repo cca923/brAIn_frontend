@@ -59,6 +59,7 @@ const folderSlice = createSlice({
 
         state.loadingMap.addFolder = false;
         state.folders = [...state.folders, folder];
+        state.selectedFolderId = folder?.id; // set to new folderId
         state.isAddingFolder = false;
       })
       .addCase(handleAddFolder.rejected, (state, action) => {
@@ -78,8 +79,7 @@ const folderSlice = createSlice({
           (folder) => folder.id !== folderId
         );
         if (state.selectedFolderId === folderId && state.folders.length > 0) {
-          state.selectedFolderId = state.folders[0].id;
-          state.folders[0].selected = true;
+          state.selectedFolderId = state.folders[0]?.id;
         }
       })
       .addCase(handleRemoveFolder.rejected, (state, action) => {

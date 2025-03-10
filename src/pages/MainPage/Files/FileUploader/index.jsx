@@ -1,22 +1,15 @@
 import { useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { IoCloudUploadSharp } from "react-icons/io5";
 
 import { handleUploadFile } from "../../../../store/files/service";
-import { fileSelector } from "../../../../store/selectors";
 import { Icon } from "../../../../styles/common";
 
-import {
-  UploaderContainer,
-  UploadButton,
-  HiddenInput,
-  ErrorMessage,
-} from "./styles";
+import { UploaderContainer, UploadButton, HiddenInput, Info } from "./styles";
 
 const FileUploader = () => {
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
-  const { uploadError } = useSelector(fileSelector);
 
   const [isUploading, setIsUploading] = useState(false);
 
@@ -28,9 +21,7 @@ const FileUploader = () => {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-
     if (!file) return;
-
     setIsUploading(true);
 
     try {
@@ -60,7 +51,7 @@ const FileUploader = () => {
         onChange={handleFileChange}
         disabled={isUploading}
       />
-      {uploadError && <ErrorMessage>{uploadError}</ErrorMessage>}
+      <Info>{"Please upload .pdf, .ppt, or .doc files smaller than 2MB."}</Info>
     </UploaderContainer>
   );
 };

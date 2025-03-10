@@ -58,12 +58,16 @@ export const postApiJsonRequest = async ({ endpoint, data, headers = {} }) => {
 export const createFormData = (data) => {
   const formData = new FormData();
   Object.entries(data).forEach(([key, value]) => {
-    if (Array.isArray(value)) {
+    if (key === "file") {
+      formData.append("file", value);
+    } else if (Array.isArray(value)) {
       value.forEach((item) => formData.append(`${key}[]`, item));
     } else {
       formData.append(key, value);
     }
   });
+  console.log("##", { formData });
+
   return formData;
 };
 

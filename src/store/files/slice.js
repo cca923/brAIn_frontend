@@ -9,18 +9,13 @@ const initialState = {
     addFile: false,
     removeFile: false,
   },
-  uploadError: null,
   error: null,
 };
 
 const fileSlice = createSlice({
   name: "files",
   initialState,
-  reducers: {
-    setUploadError: (state, action) => {
-      state.uploadError = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       // Load Files API
@@ -45,15 +40,9 @@ const fileSlice = createSlice({
       })
       .addCase(handleUploadFile.fulfilled, (state, action) => {
         const { file } = action.payload;
-        const item = {
-          id: Date.now().toString(),
-          name: file.name,
-          type: file.name.split(".").pop(),
-        };
 
         state.loadingMap.addFile = false;
-        state.files.push(item);
-        state.uploadError = null;
+        state.files = [...state.files, file];
       })
       .addCase(handleUploadFile.rejected, (state, action) => {
         state.loadingMap.addFile = false;
@@ -77,5 +66,4 @@ const fileSlice = createSlice({
   },
 });
 
-export const { setUploadError } = fileSlice.actions;
 export default fileSlice.reducer;

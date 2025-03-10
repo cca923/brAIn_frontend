@@ -1,21 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 import { fetchFolders, postAddFolder, deleteRemoveFolder } from "../../apis";
-import { addToast } from "../toast/slice";
 import { foldersTypes } from "../types";
 import { idFormatter } from "../utils";
-import { handleLoadFiles } from "../files/service";
 
 export const handleLoadFolders = createAsyncThunk(
   foldersTypes.handleLoadFolders,
-  async (_, { dispatch }) => {
+  async () => {
     try {
       const response = await fetchFolders();
       const folders = idFormatter(response);
 
       // Load default files depends on folderId
       const selectedFolderId = folders?.[0]?.id;
-      await dispatch(handleLoadFiles({ folderId: selectedFolderId }));
 
       return {
         folders,
@@ -29,19 +27,17 @@ export const handleLoadFolders = createAsyncThunk(
 
 export const handleAddFolder = createAsyncThunk(
   foldersTypes.handleAddFolder,
-  async ({ name: reqName }, { dispatch }) => {
+  async ({ name: reqName }) => {
     try {
       const response = await postAddFolder({ name: reqName });
       const { _id: id, name } = response || {};
-      dispatch(
-        addToast({ message: "Folder added successfully.", type: "success" })
-      );
+      toast.success("Folder added successfully.");
 
       return {
         folder: { id, name },
       };
     } catch (error) {
-      dispatch(addToast({ message: error?.message, type: "error" }));
+      toast.error(error?.message);
       return Promise.reject(error.message);
     }
   }
@@ -49,17 +45,17 @@ export const handleAddFolder = createAsyncThunk(
 
 export const handleRemoveFolder = createAsyncThunk(
   foldersTypes.handleRemoveFolder,
-  async ({ folderId }, { dispatch }) => {
+  async ({ folderId }) => {
     try {
       const response = await deleteRemoveFolder({ folderId });
       const { message } = response || {};
-      dispatch(addToast({ message, type: "success" }));
+      toast.success(message);
 
       return {
         folderId,
       };
     } catch (error) {
-      dispatch(addToast({ message: error?.message, type: "error" }));
+      toast.error(error?.message);
       return Promise.reject(error.message);
     }
   }

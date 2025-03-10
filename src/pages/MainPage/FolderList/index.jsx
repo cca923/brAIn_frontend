@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { IoAddCircle } from "react-icons/io5";
 
 import { scrollToBottom } from "../../../utils/scroll";
+import { addToast } from "../../../store/toast/slice";
 import { toggleAddFolder } from "../../../store/folders/slice";
 import { folderSelector } from "../../../store/selectors";
 import {
   handleAddFolder,
-  handleLoadFolders,
   handleRemoveFolder,
 } from "../../../store/folders/service";
+import { handleLoadFiles } from "../../../store/files/service";
 import { Icon } from "../../../styles/common";
 
 import {
@@ -31,7 +32,7 @@ const FolderList = () => {
   const prevFolderLength = useRef(folders.length); // Keep track of previous length of the folder list
 
   const handleFolderClick = ({ id }) => {
-    dispatch(handleLoadFolders({ folderId: id }));
+    dispatch(handleLoadFiles({ folderId: id }));
   };
 
   const handleFolderRemove = ({ id }) => {
@@ -50,7 +51,12 @@ const FolderList = () => {
         (folder) => folder.name.toLowerCase() === folderName.toLowerCase()
       );
       if (folderExists) {
-        alert("Folder with the same name already exists!");
+        dispatch(
+          addToast({
+            message: "Folder with the same name already exists!",
+            type: "error",
+          })
+        );
         return;
       }
 

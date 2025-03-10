@@ -9,7 +9,13 @@ import QuizButton from "../../containers/Buttons/QuizButton";
 import ChatButton from "../../containers/Buttons/ChatButton";
 import ExitButton from "../../containers/Buttons/ExitButton";
 
-import { PageContainer, Card, SummaryContainer, Summary } from "./styles";
+import {
+  PageContainer,
+  Card,
+  SummaryContainer,
+  Summary,
+  Alert,
+} from "./styles";
 
 const SummaryPage = () => {
   const { summary } = useSelector(summarySelector);
@@ -21,7 +27,11 @@ const SummaryPage = () => {
         <ExitButton />
         <SummaryContainer>
           <Summary>
-            <ReactMarkdown>{summary}</ReactMarkdown>
+            {summary ? (
+              <ReactMarkdown>{summary}</ReactMarkdown>
+            ) : (
+              <Alert>Summary is not available. Please upload the file.</Alert>
+            )}
           </Summary>
           <RowButtonsContainer width="50%" m="auto auto 0">
             <QuizButton />

@@ -22,6 +22,11 @@ const folderSlice = createSlice({
   name: "folders",
   initialState,
   reducers: {
+    setSelectedFolderId: (state, action) => {
+      const { folderId } = action.payload;
+
+      state.selectedFolderId = folderId;
+    },
     toggleAddFolder: (state) => {
       state.isAddingFolder = !state.isAddingFolder;
     },
@@ -34,17 +39,11 @@ const folderSlice = createSlice({
         state.error = null;
       })
       .addCase(handleLoadFolders.fulfilled, (state, action) => {
-        const { folderId, folders } = action.payload;
+        const { folders, selectedFolderId } = action.payload;
 
         state.loadingMap.loadFolders = false;
         state.folders = folders;
-        state.selectedFolderId = folderId;
-
-        // Handle default id
-        if (!folderId) {
-          state.selectedFolderId = state.folders[0].id;
-          state.folders[0].selected = true;
-        }
+        state.selectedFolderId = selectedFolderId; // default folderId
       })
       .addCase(handleLoadFolders.rejected, (state, action) => {
         state.loadingMap.loadFolders = false;
@@ -56,15 +55,10 @@ const folderSlice = createSlice({
         state.error = null;
       })
       .addCase(handleAddFolder.fulfilled, (state, action) => {
-        const { name } = action.payload;
-        const newFolder = {
-          id: Date.now().toString(),
-          name,
-          selected: false,
-        };
+        const { folder } = action.payload;
 
         state.loadingMap.addFolder = false;
-        state.folders.push(newFolder);
+        state.folders = [...state.folders, folder];
         state.isAddingFolder = false;
       })
       .addCase(handleAddFolder.rejected, (state, action) => {
@@ -95,5 +89,5 @@ const folderSlice = createSlice({
   },
 });
 
-export const { toggleAddFolder } = folderSlice.actions;
+export const { setSelectedFolderId, toggleAddFolder } = folderSlice.actions;
 export default folderSlice.reducer;

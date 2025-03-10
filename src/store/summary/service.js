@@ -1,24 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { fetchSummary } from "../../apis";
 import { summaryTypes } from "../types";
 import { MSG_TYPE } from "../../constants";
-
-// Simulate API delay
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadSummary = createAsyncThunk(
   summaryTypes.handleLoadSummary,
   async (_, { getState }) => {
     try {
       const { folders } = getState();
-      // TODO: api
       const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId });
 
-      // Simulate API call
-      await delay(700);
-
-      const summary = "test\ntest\ntest\n**test**";
+      const response = await fetchSummary({ folderId });
+      const { summary } = response || {};
 
       return {
         summary,

@@ -8,6 +8,8 @@ export const quizSelector = (state) => state.quiz;
 
 export const chatSelector = (state) => state.chat;
 
+export const toastSelector = (state) => state.toast;
+
 export const isPageLoadingSelector = (state) => {
   const { folders, files, summary, quiz, chat } = state;
 

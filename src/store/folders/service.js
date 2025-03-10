@@ -1,31 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { fetchFolders, postAddFolder, deleteRemoveFolder } from "../../apis";
+import { addToast } from "../toast/slice";
 import { foldersTypes } from "../types";
-
-// Simulate API delay
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+import { idFormatter } from "../utils";
+import { handleLoadFiles } from "../files/service";
 
 export const handleLoadFolders = createAsyncThunk(
   foldersTypes.handleLoadFolders,
-  async ({ folderId } = {}) => {
+  async (_, { dispatch }) => {
     try {
-      // Simulate API call
-      await delay(700);
+      const response = await fetchFolders();
+      const folders = idFormatter(response);
 
-      // You could make a real API call here:
-      // const response = await fetch('/api/folders');
-      // const data = await response.json();
-
-      // For now, return mock data
-      const folders = [
-        { id: "1", name: "IT 5004 Enterprise Systems" },
-        { id: "2", name: "CS5344 Big-Data Analytics" },
-        { id: "3", name: "IT5003 Data Structures and Algorithms" },
-      ];
+      // Load default files depends on folderId
+      const selectedFolderId = folders?.[0]?.id;
+      await dispatch(handleLoadFiles({ folderId: selectedFolderId }));
 
       return {
-        folderId,
         folders,
+        selectedFolderId,
       };
     } catch (error) {
       return Promise.reject(error.message);
@@ -35,28 +29,19 @@ export const handleLoadFolders = createAsyncThunk(
 
 export const handleAddFolder = createAsyncThunk(
   foldersTypes.handleAddFolder,
-  async ({ name }, { getState }) => {
+  async ({ name: reqName }, { dispatch }) => {
     try {
-      const { folders } = getState();
-      // TODO: api / handle same name alert
-      const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId });
-
-      // Simulate API call
-      await delay(500);
-
-      // You could make a real API call here:
-      // const response = await fetch('/api/folders', {
-      //   method: 'POST',
-      //   body: JSON.stringify({ name }),
-      //   headers: { 'Content-Type': 'application/json' }
-      // });
-      // const data = await response.json();
+      const response = await postAddFolder({ name: reqName });
+      const { _id: id, name } = response || {};
+      dispatch(
+        addToast({ message: "Folder added successfully.", type: "success" })
+      );
 
       return {
-        name,
+        folder: { id, name },
       };
     } catch (error) {
+      dispatch(addToast({ message: error?.message, type: "error" }));
       return Promise.reject(error.message);
     }
   }
@@ -64,25 +49,17 @@ export const handleAddFolder = createAsyncThunk(
 
 export const handleRemoveFolder = createAsyncThunk(
   foldersTypes.handleRemoveFolder,
-  async (_, { getState }) => {
+  async ({ folderId }, { dispatch }) => {
     try {
-      const { folders } = getState();
-      // TODO: api
-      const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId });
-
-      // Simulate API call
-      await delay(500);
-
-      // You could make a real API call here:
-      // await fetch(`/api/folders/${folderId}`, {
-      //   method: 'DELETE'
-      // });
+      const response = await deleteRemoveFolder({ folderId });
+      const { message } = response || {};
+      dispatch(addToast({ message, type: "success" }));
 
       return {
         folderId,
       };
     } catch (error) {
+      dispatch(addToast({ message: error?.message, type: "error" }));
       return Promise.reject(error.message);
     }
   }

@@ -22,7 +22,7 @@ const VoiceMode = ({
   return (
     <>
       <RecordButton
-        variant={isRecording ? "danger" : "default"}
+        type={isRecording ? "danger" : "default"}
         onClick={toggleRecording}
         iconComponent={isRecording ? <FaStop /> : <BsRecordCircle />}
       />

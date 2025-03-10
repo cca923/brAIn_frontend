@@ -15,7 +15,7 @@ export const FolderItemContainer = styled.div`
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.white}30;
+    background-color: ${({ theme }) => theme.colors.white}40;
   }
 `;
 

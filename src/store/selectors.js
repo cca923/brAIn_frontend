@@ -14,6 +14,7 @@ export const isPageLoadingSelector = (state) => {
   const loadingStates = [
     folders?.loadingMap?.loadFolders,
     files?.loadingMap?.loadFiles,
+    files?.loadingMap?.uploadFile,
     summary?.loadingMap?.loadSummary,
     quiz?.loadingMap?.loadQuizzes,
     quiz?.loadingMap?.submitQuiz,

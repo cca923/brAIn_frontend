@@ -6,7 +6,7 @@ const initialState = {
   files: [],
   loadingMap: {
     loadFiles: false,
-    addFile: false,
+    uploadFile: false,
     removeFile: false,
   },
   error: null,
@@ -35,17 +35,17 @@ const fileSlice = createSlice({
       })
       // Upload File API
       .addCase(handleUploadFile.pending, (state) => {
-        state.loadingMap.addFile = true;
+        state.loadingMap.uploadFile = true;
         state.error = null;
       })
       .addCase(handleUploadFile.fulfilled, (state, action) => {
         const { file } = action.payload;
 
-        state.loadingMap.addFile = false;
+        state.loadingMap.uploadFile = false;
         state.files = [...state.files, file];
       })
       .addCase(handleUploadFile.rejected, (state, action) => {
-        state.loadingMap.addFile = false;
+        state.loadingMap.uploadFile = false;
         state.error = action.error.message;
       })
       // Remove File API

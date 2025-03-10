@@ -4,10 +4,7 @@ import { IoAddCircle } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 import { scrollToTarget } from "../../../utils/scroll";
-import {
-  setSelectedFolderId,
-  toggleAddFolder,
-} from "../../../store/folders/slice";
+import { setSelectedFolderId } from "../../../store/folders/slice";
 import { folderSelector } from "../../../store/selectors";
 import {
   handleAddFolder,
@@ -27,11 +24,18 @@ import FolderItem from "./FolderItem";
 
 const FolderList = () => {
   const dispatch = useDispatch();
-  const { folders, selectedFolderId, isAddingFolder } =
-    useSelector(folderSelector);
+  const { folders, selectedFolderId } = useSelector(folderSelector);
+
+  const [isAddingFolder, setIsAddingFolder] = useState(false);
   const [newFolderName, setNewFolderName] = useState("");
+
   const targetRef = useRef(null);
   const targetElement = targetRef?.current;
+
+  const toggleAddingFolder = () => {
+    setIsAddingFolder((prev) => !prev);
+    setNewFolderName("");
+  };
 
   const handleFolderClick = ({ id }) => {
     dispatch(setSelectedFolderId({ folderId: id }));
@@ -41,30 +45,22 @@ const FolderList = () => {
     dispatch(handleRemoveFolder({ folderId: id }));
   };
 
-  const handleAddFolderClick = () => {
-    dispatch(toggleAddFolder());
-    setNewFolderName("");
-  };
-
   const handleConfirmAddFolder = () => {
-    const folderName = newFolderName.trim();
-    if (folderName) {
-      const folderExists = folders?.some(
-        (folder) => folder.name.toLowerCase() === folderName.toLowerCase()
-      );
-      if (folderExists) {
-        toast.error("Folder with the same name already exists!");
-        return;
-      }
+    const folderName = newFolderName?.trim();
+    if (!folderName) return;
 
-      return dispatch(handleAddFolder({ name: folderName }));
+    const folderExists = folders?.some((folder) => folder?.name === folderName);
+    if (folderExists) {
+      toast.error("Folder with the same name already exists!");
+      return;
     }
+
+    return dispatch(handleAddFolder({ name: folderName }));
   };
 
   useEffect(() => {
-    if (targetElement) {
-      scrollToTarget(targetElement);
-    }
+    if (!targetElement) return;
+    scrollToTarget(targetElement);
   }, [targetElement]);
 
   return (
@@ -94,14 +90,14 @@ const FolderList = () => {
             autoFocus
           />
           <ButtonGroup>
-            <CancelButton onClick={handleAddFolderClick}>Cancel</CancelButton>
+            <CancelButton onClick={toggleAddingFolder}>Cancel</CancelButton>
             <ConfirmButton onClick={handleConfirmAddFolder}>
               Confirm
             </ConfirmButton>
           </ButtonGroup>
         </AddFolderInput>
       ) : (
-        <AddFolderButton onClick={handleAddFolderClick}>
+        <AddFolderButton onClick={toggleAddingFolder}>
           <Icon fontSize="20px" mr="5px">
             <IoAddCircle />
           </Icon>

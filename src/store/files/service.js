@@ -1,32 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
+import { filesTypes } from "../types";
+import { fetchFiles } from "../../apis";
+import { idFormatter } from "../utils";
+import { setSelectedFolderId } from "../folders/slice";
+
 import { setUploadError } from "./slice";
-import { filesType } from "../types";
 
 // Simulate API delay
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadFiles = createAsyncThunk(
-  filesType.handleLoadFiles,
-  async ({ folderId }) => {
+  filesTypes.handleLoadFiles,
+  async ({ folderId }, { dispatch }) => {
     try {
-      // Simulate API call
-      await delay(700);
+      const response = await fetchFiles({ folderId });
+      const files = idFormatter(response);
 
-      // You could make a real API call here:
-      // const response = await fetch(`/api/folders/${folderId}/files`);
-      // const data = await response.json();
-
-      // For now, return mock data based on folder ID
-      let files = [];
-
-      if (folderId === "2") {
-        files = [
-          { id: "1", name: "File 1", type: "pdf" },
-          { id: "2", name: "File 2", type: "ppt" },
-          { id: "3", name: "File 3", type: "doc" },
-          { id: "4", name: "File 4", type: "pdf" },
-        ];
-      }
+      // Switch to this folder after successfully loads its files
+      dispatch(setSelectedFolderId({ folderId }));
 
       return {
         files,
@@ -38,9 +30,14 @@ export const handleLoadFiles = createAsyncThunk(
 );
 
 export const handleUploadFile = createAsyncThunk(
-  filesType.handleUploadFile,
-  async ({ folderId, file }, { dispatch }) => {
+  filesTypes.handleUploadFile,
+  async ({ file }, { dispatch, getState }) => {
     try {
+      const { folders } = getState();
+      // TODO: api
+      const folderId = folders?.selectedFolderId;
+      console.log("##", { folderId });
+
       // Validate file type
       const fileType = file.name.split(".").pop().toLowerCase();
       const validTypes = ["pdf", "ppt", "doc", "pptx", "docx"];
@@ -85,9 +82,14 @@ export const handleUploadFile = createAsyncThunk(
 );
 
 export const handleRemoveFile = createAsyncThunk(
-  filesType.handleRemoveFile,
-  async ({ folderId, fileId }) => {
+  filesTypes.handleRemoveFile,
+  async ({ fileId }, { getState }) => {
     try {
+      const { folders } = getState();
+      // TODO: api
+      const folderId = folders?.selectedFolderId;
+      console.log("##", { folderId });
+
       // Simulate API call
       await delay(500);
 

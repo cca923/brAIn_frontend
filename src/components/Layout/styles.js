@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const LayoutContainer = styled.div`
+  width: 100%;
+  height: 100vh;
   display: grid;
   grid-template-columns: 300px 1fr;
-  min-height: 100vh;
 `;
 
 export const Sidebar = styled.div`
@@ -12,6 +13,5 @@ export const Sidebar = styled.div`
 `;
 
 export const MainContent = styled.div`
-  max-width: calc(100vw - 300px);
   padding: ${({ theme }) => theme.spacing.lg};
 `;

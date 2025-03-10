@@ -1,16 +1,18 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { IoAddCircle } from "react-icons/io5";
+import { toast } from "react-toastify";
 
-import { scrollToBottom } from "../../../utils/scroll";
-import { addToast } from "../../../store/toast/slice";
-import { toggleAddFolder } from "../../../store/folders/slice";
+import { scrollToTarget } from "../../../utils/scroll";
+import {
+  setSelectedFolderId,
+  toggleAddFolder,
+} from "../../../store/folders/slice";
 import { folderSelector } from "../../../store/selectors";
 import {
   handleAddFolder,
   handleRemoveFolder,
 } from "../../../store/folders/service";
-import { handleLoadFiles } from "../../../store/files/service";
 import { Icon } from "../../../styles/common";
 
 import {
@@ -28,11 +30,11 @@ const FolderList = () => {
   const { folders, selectedFolderId, isAddingFolder } =
     useSelector(folderSelector);
   const [newFolderName, setNewFolderName] = useState("");
-  const folderListRef = useRef(null); // Reference to the folder list container
-  const prevFolderLength = useRef(folders.length); // Keep track of previous length of the folder list
+  const targetRef = useRef(null);
+  const targetElement = targetRef?.current;
 
   const handleFolderClick = ({ id }) => {
-    dispatch(handleLoadFiles({ folderId: id }));
+    dispatch(setSelectedFolderId({ folderId: id }));
   };
 
   const handleFolderRemove = ({ id }) => {
@@ -51,12 +53,7 @@ const FolderList = () => {
         (folder) => folder.name.toLowerCase() === folderName.toLowerCase()
       );
       if (folderExists) {
-        dispatch(
-          addToast({
-            message: "Folder with the same name already exists!",
-            type: "error",
-          })
-        );
+        toast.error("Folder with the same name already exists!");
         return;
       }
 
@@ -65,17 +62,15 @@ const FolderList = () => {
   };
 
   useEffect(() => {
-    // Only scroll to the bottom if a new folder is added
-    if (folders?.length > prevFolderLength?.current) {
-      scrollToBottom(folderListRef?.current);
+    if (targetElement) {
+      scrollToTarget(targetElement);
     }
-    prevFolderLength.current = folders.length;
-  }, [folders]);
+  }, [targetElement]);
 
   return (
     <FolderListContainer>
       <h2 className="title">Folders</h2>
-      <div className="wrapper" ref={folderListRef}>
+      <div className="wrapper">
         {folders?.map((folder) => (
           <FolderItem
             key={folder.id}
@@ -84,6 +79,7 @@ const FolderList = () => {
             name={folder.name}
             onClick={handleFolderClick}
             onRemove={handleFolderRemove}
+            targetRef={targetRef}
           ></FolderItem>
         ))}
       </div>

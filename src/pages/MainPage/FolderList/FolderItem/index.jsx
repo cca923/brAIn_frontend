@@ -1,6 +1,13 @@
 import { FolderItemContainer, FolderName, RemoveBtn } from "./styles";
 
-const FolderItem = ({ folderId, selected, name, onClick, onRemove }) => {
+const FolderItem = ({
+  folderId,
+  selected,
+  name,
+  onClick,
+  onRemove,
+  targetRef,
+}) => {
   const handleItemClick = () => {
     onClick({ id: folderId });
   };
@@ -11,7 +18,11 @@ const FolderItem = ({ folderId, selected, name, onClick, onRemove }) => {
   };
 
   return (
-    <FolderItemContainer selected={selected} onClick={handleItemClick}>
+    <FolderItemContainer
+      ref={selected && targetRef}
+      selected={selected}
+      onClick={handleItemClick}
+    >
       <FolderName selected={selected}>{name}</FolderName>
       <RemoveBtn onClick={(e) => handleItemRemove({ e })}>×</RemoveBtn>
     </FolderItemContainer>

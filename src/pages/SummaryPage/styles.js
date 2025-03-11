@@ -28,7 +28,6 @@ export const Summary = styled.div`
   line-height: 1.5;
   flex: 1;
   padding: 0 100px 40px;
-  white-space: pre-wrap;
 `;
 
 export const Alert = styled.h2`

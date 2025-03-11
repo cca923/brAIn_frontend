@@ -22,7 +22,7 @@ import {
 import Message from "./Message";
 import TextMode from "./TextMode";
 import VoiceMode from "./VoiceMode";
-import EndChat from "./EndChat";
+import FeedbackPanel from "./FeedbackPanel";
 
 const ChatPage = () => {
   const dispatch = useDispatch();
@@ -55,15 +55,6 @@ const ChatPage = () => {
   };
 
   const renderInput = () => {
-    if (feedback) {
-      return (
-        <EndChat
-          feedback={feedback}
-          onEnd={handleEndChat}
-          onNewChat={handleNewChat}
-        />
-      );
-    }
     if (isVoiceMode) {
       return (
         <VoiceMode
@@ -107,8 +98,14 @@ const ChatPage = () => {
           {isLoading && <Message type={MSG_TYPE.SERVER} message="Typing..." />}
         </MessagesContainer>
 
-        <InputContainer>{renderInput()}</InputContainer>
+        {!feedback && <InputContainer>{renderInput()}</InputContainer>}
       </Card>
+
+      <FeedbackPanel
+        feedback={feedback}
+        onEnd={handleEndChat}
+        onNewChat={handleNewChat}
+      />
     </PageContainer>
   );
 };

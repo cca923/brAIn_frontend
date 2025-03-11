@@ -80,30 +80,32 @@ const Folders = () => {
         ))}
       </div>
 
-      {isAddingFolder ? (
-        <AddFolderInput>
-          <input
-            type="text"
-            placeholder="Enter the folder name"
-            value={newFolderName}
-            onChange={(e) => setNewFolderName(e.target.value)}
-            autoFocus
-          />
-          <ButtonGroup>
-            <CancelButton onClick={toggleAddingFolder}>Cancel</CancelButton>
-            <ConfirmButton onClick={handleConfirmAddFolder}>
-              Confirm
-            </ConfirmButton>
-          </ButtonGroup>
-        </AddFolderInput>
-      ) : (
-        <AddFolderButton onClick={toggleAddingFolder}>
-          <Icon fontSize="20px" mr="5px">
-            <IoAddCircle />
-          </Icon>
-          Add New Folder
-        </AddFolderButton>
-      )}
+      <div className="action-groups">
+        {isAddingFolder ? (
+          <AddFolderInput>
+            <input
+              type="text"
+              placeholder="Enter the folder name"
+              value={newFolderName}
+              onChange={(e) => setNewFolderName(e.target.value)}
+              autoFocus
+            />
+            <ButtonGroup>
+              <CancelButton onClick={toggleAddingFolder}>Cancel</CancelButton>
+              <ConfirmButton onClick={handleConfirmAddFolder}>
+                Confirm
+              </ConfirmButton>
+            </ButtonGroup>
+          </AddFolderInput>
+        ) : (
+          <AddFolderButton onClick={toggleAddingFolder}>
+            <Icon fontSize="20px" mr="5px">
+              <IoAddCircle />
+            </Icon>
+            Add New Folder
+          </AddFolderButton>
+        )}
+      </div>
     </FoldersContainer>
   );
 };

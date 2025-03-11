@@ -18,11 +18,11 @@ import {
   ButtonGroup,
   CancelButton,
   ConfirmButton,
-  FolderListContainer,
+  FoldersContainer,
 } from "./styles";
 import FolderItem from "./FolderItem";
 
-const FolderList = () => {
+const Folders = () => {
   const dispatch = useDispatch();
   const { folders, selectedFolderId } = useSelector(folderSelector);
 
@@ -64,7 +64,7 @@ const FolderList = () => {
   }, [targetElement]);
 
   return (
-    <FolderListContainer>
+    <FoldersContainer>
       <h2 className="title">Folders</h2>
       <div className="wrapper">
         {folders?.map((folder) => (
@@ -104,8 +104,8 @@ const FolderList = () => {
           Add New Folder
         </AddFolderButton>
       )}
-    </FolderListContainer>
+    </FoldersContainer>
   );
 };
 
-export default FolderList;
+export default Folders;

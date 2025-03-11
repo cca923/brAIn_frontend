@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { Button } from "../../../styles/common";
 
-export const FolderListContainer = styled.div`
+export const FoldersContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.light};
   width: 100%;
   height: 100%;

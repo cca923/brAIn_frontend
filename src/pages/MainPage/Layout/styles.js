@@ -15,5 +15,8 @@ export const Sidebar = styled.div`
 
 export const MainContent = styled.div`
   flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   padding: ${({ theme }) => theme.spacing.lg};
 `;

@@ -6,7 +6,7 @@ export const UploaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: auto;
+  margin-top: ${({ theme }) => theme.spacing.md};
 `;
 
 export const UploadButton = styled(Button)`

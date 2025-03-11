@@ -4,7 +4,7 @@ import ActionButton from "../../../components/ActionButton";
 
 export const PanelContainer = styled.div`
   width: 50%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   top: 0;
   right: 0;

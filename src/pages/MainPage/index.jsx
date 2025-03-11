@@ -19,8 +19,10 @@ function MainPage() {
 
   useEffect(() => {
     // Load folders "once" when component mounts
-    dispatch(handleLoadFolders());
-  }, [dispatch]);
+    if (!selectedFolderId) {
+      dispatch(handleLoadFolders());
+    }
+  }, [dispatch, selectedFolderId]);
 
   useEffect(() => {
     // Load files when current folder id changed

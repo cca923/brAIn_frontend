@@ -28,3 +28,12 @@ export const deleteRemoveFile = ({ fileId }) =>
 
 export const fetchSummary = ({ folderId }) =>
   fetchApiRequest({ endpoint: `api/summarization/${folderId}` });
+
+export const postStartChat = ({ folderId }) =>
+  postApiJsonRequest({ endpoint: "api/chat/start_chat", data: { folderId } });
+
+export const postSendMessage = ({ sessionId, message }) =>
+  postApiJsonRequest({
+    endpoint: "api/chat/chat",
+    data: { sessionId, userMessage: message },
+  });

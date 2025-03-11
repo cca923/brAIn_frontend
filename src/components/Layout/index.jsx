@@ -1,10 +1,12 @@
-import { LayoutContainer, MainContent, Sidebar } from "./styles";
+import { LayoutContainer } from "./styles";
 
-const Layout = ({ sidebar, children }) => {
+const Layout = ({ children }) => {
   return (
     <LayoutContainer>
-      <Sidebar>{sidebar}</Sidebar>
-      <MainContent>{children}</MainContent>
+      <div className="logo-container">
+        <img className="logo-img" src="public/images/logo.png" alt="logo" />
+      </div>
+      <div className="page">{children}</div>
     </LayoutContainer>
   );
 };

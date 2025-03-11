@@ -7,6 +7,7 @@ const ChatTextarea = ({
   inputMessage,
   onInputChange,
   onKeyPress,
+  disabled,
 }) => {
   // Auto-resizing
   const adjustHeight = useCallback(() => {
@@ -30,6 +31,7 @@ const ChatTextarea = ({
       onChange={onInputChange}
       onKeyPress={onKeyPress}
       placeholder="Type your message..."
+      disabled={disabled}
     />
   );
 };

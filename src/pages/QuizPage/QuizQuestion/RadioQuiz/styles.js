@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const RadioGroup = styled.div`
   display: flex;
@@ -24,6 +24,7 @@ export const RadioOption = styled.label`
 
   &.correct {
     color: ${({ theme }) => theme.colors.primary};
+    font-weight: 600;
   }
   &.wrong {
     color: ${({ theme }) => theme.colors.danger};

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 import { isPageLoadingSelector } from "./store/selectors";
+import Layout from "./components/Layout";
 import Loading from "./components/Loading";
 import MainPage from "./pages/MainPage";
 import SummaryButton from "./pages/SummaryPage";
@@ -14,15 +15,7 @@ function App() {
   const isLoading = useSelector(isPageLoadingSelector);
 
   return (
-    <div
-      style={{
-        maxWidth: "1800px",
-        minWidth: "760px",
-        minHeight: "100vh",
-        margin: "0 auto",
-        overflow: "auto",
-      }}
-    >
+    <Layout>
       {isLoading && <Loading />}
       <ToastContainer autoClose={2000} hideProgressBar />
       <Routes>
@@ -32,7 +25,7 @@ function App() {
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/past" element={<PastPage />} />
       </Routes>
-    </div>
+    </Layout>
   );
 }
 

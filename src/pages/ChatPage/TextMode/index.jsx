@@ -4,7 +4,7 @@ import { LuSend } from "react-icons/lu";
 import { Icon } from "../../../styles/common";
 import CommonButton from "../CommonButton";
 
-import AutoResizingTextarea from "./ChatTextarea";
+import ChatTextarea from "./ChatTextarea";
 
 const TextMode = ({
   textToVoiceMode,
@@ -13,6 +13,7 @@ const TextMode = ({
   onInputChange,
   onKeyPress,
   onSend,
+  disabled,
 }) => (
   <>
     <CommonButton
@@ -20,11 +21,12 @@ const TextMode = ({
       iconComponent={<TiMicrophoneOutline />}
     />
 
-    <AutoResizingTextarea
+    <ChatTextarea
       chatInputRef={chatInputRef}
       inputMessage={inputMessage}
       onInputChange={onInputChange}
       onKeyPress={onKeyPress}
+      disabled={disabled}
     />
 
     <CommonButton

@@ -13,4 +13,8 @@ export const Textarea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.colors.gray};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   margin: 0 ${({ theme }) => theme.spacing.sm};
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
 `;

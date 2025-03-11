@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
 import Header from "../../containers/Header";
 import { handleLoadFolders } from "../../store/folders/service";
@@ -9,7 +8,8 @@ import { handleLoadFiles } from "../../store/files/service";
 import { folderSelector } from "../../store/selectors";
 
 import { SidebarContainer } from "./styles";
-import FolderList from "./FolderList";
+import Layout from "./Layout";
+import Folders from "./Folders";
 import Files from "./Files";
 import ActionButtons from "./ActionButtons";
 
@@ -33,7 +33,7 @@ function MainPage() {
     <Layout
       sidebar={
         <SidebarContainer>
-          <FolderList />
+          <Folders />
         </SidebarContainer>
       }
     >

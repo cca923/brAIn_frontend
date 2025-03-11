@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 import { Button } from "../../../styles/common";
 
-export const FolderListContainer = styled.div`
+export const FoldersContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.light};
   width: 100%;
   height: 100%;
   padding: ${({ theme }) => theme.spacing.md};
+  display: flex;
+  flex-direction: column;
 
   .title {
     font-size: 24px;
@@ -15,9 +17,12 @@ export const FolderListContainer = styled.div`
   }
 
   .wrapper {
-    max-height: calc(100vh - 220px);
+    flex: 1;
     overflow-y: scroll;
-    scroll-behavior: smooth;
+  }
+  .action-groups {
+    height: 120px;
+    margin-top: ${({ theme }) => theme.spacing.md};
   }
 `;
 
@@ -28,7 +33,6 @@ export const AddFolderButton = styled(Button)`
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.secondary}50;
   color: ${({ theme }) => theme.colors.primary};
-  margin-top: ${({ theme }) => theme.spacing.md};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.secondary}50;
@@ -36,8 +40,6 @@ export const AddFolderButton = styled(Button)`
 `;
 
 export const AddFolderInput = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.md};
-
   input {
     width: 100%;
     padding: ${({ theme }) => theme.spacing.md};

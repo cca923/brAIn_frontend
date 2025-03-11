@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 import { filesTypes } from "../types";
-import { fetchFiles, deleteRemoveFile } from "../../apis";
+import { fetchFiles, postUploadFile, deleteRemoveFile } from "../../apis";
 import { idFormatter } from "../utils";
 
 export const handleLoadFiles = createAsyncThunk(
@@ -43,19 +43,7 @@ export const handleUploadFile = createAsyncThunk(
         return Promise.reject("File size too large");
       }
 
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("folderId", folderId);
-
-      const response = await fetch(
-        "https://brain-backend-xuh1.onrender.com/api/files",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      // const response = await postUploadFile({ folderId, file });
+      const response = await postUploadFile({ folderId, file });
       const { _id: id, name } = response || {};
 
       return {

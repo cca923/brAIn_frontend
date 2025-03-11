@@ -1,19 +1,27 @@
 import styled from "styled-components";
 
 export const LayoutContainer = styled.div`
-  width: 100%;
+  max-width: 1800px;
+  min-width: 760px;
+  min-height: 100vh;
   height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
   display: flex;
-`;
+  flex-direction: column;
 
-export const Sidebar = styled.div`
-  min-width: 300px;
-  width: 300px;
-  background-color: ${({ theme }) => theme.colors.light};
-  border-right: 1px solid ${({ theme }) => theme.colors.gray};
-`;
+  .logo-container {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding-left: ${({ theme }) => theme.spacing.md};
+    background-color: #e0ddff;
 
-export const MainContent = styled.div`
-  flex: 1;
-  padding: ${({ theme }) => theme.spacing.lg};
+    .logo-img {
+      width: 100px;
+    }
+  }
+  .page {
+    height: calc(100vh - 60px);
+  }
 `;

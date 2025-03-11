@@ -2,28 +2,25 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { chatTypes } from "../types";
 import { MSG_TYPE } from "../../constants";
+import { postStartChat, postSendMessage } from "../../apis";
 
-// Simulate API delay
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-export const handleLoadChat = createAsyncThunk(
-  chatTypes.handleLoadChat,
+export const handleStartChat = createAsyncThunk(
+  chatTypes.handleStartChat,
   async (_, { getState }) => {
     try {
       const { folders } = getState();
-      // TODO: api
       const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId });
 
-      // Simulate API call
-      await delay(700);
+      const response = await postStartChat({ folderId });
+      const { sessionId, response: msg } = response || {};
 
       const message = {
         type: "server",
-        message: "This is first msg!",
+        message: msg,
       };
 
       return {
+        sessionId,
         message,
       };
     } catch (error) {
@@ -36,28 +33,23 @@ export const handleSendMessage = createAsyncThunk(
   chatTypes.handleSendMessage,
   async ({ message = "" } = {}, { getState }) => {
     try {
-      const { folders } = getState();
-      // TODO: api
-      const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId, message });
+      const { chat } = getState();
 
-      // Simulate API call
-      await delay(700);
+      const response = await postSendMessage({
+        sessionId: chat?.sessionId,
+        message,
+      });
+      const { sessionId, response: msg, feedback } = response || {};
 
-      // Mock response
-      const responses = {
-        message: "This is response msg!",
-        feedback:
-          "Excellent discussion! You engaged thoroughly with all the topics.",
-      };
       const serverMsg = {
         type: MSG_TYPE.SERVER,
-        message: responses?.message,
+        message: msg,
       };
 
       return {
+        sessionId,
         message: serverMsg,
-        feedback: responses?.feedback ?? "",
+        feedback,
       };
     } catch (error) {
       return Promise.reject(error.message);

@@ -13,7 +13,6 @@ import {
 import { handleLoadQuizzes, handleSubmitQuiz } from "../../store/quiz/service";
 import { quizSelector } from "../../store/selectors";
 import Header from "../../containers/Header";
-import { QUIZ_TYPE } from "../../constants";
 
 import { PageContainer, Card, Title, ActionGroup } from "./styles";
 import QuizQuestion from "./QuizQuestion";
@@ -104,7 +103,6 @@ const QuizPage = () => {
             feedback={feedback}
             quizzes={quizzes}
             selectedQuizIndex={selectedQuizIndex}
-            userAnswersMap={userAnswersMap}
             onNavDotClick={handleNavDotClick}
             onEnd={handleEndQuiz}
             onNewQuiz={handleNewQuiz}
@@ -119,15 +117,18 @@ const QuizPage = () => {
                 className={classnames({
                   selected: index === +selectedQuizIndex,
                 })}
+                index={index}
                 quizId={quiz?.id}
                 type={quiz?.type}
                 question={quiz?.question}
                 options={quiz?.options}
                 onRadioChange={handleRadioChange}
                 onBlankChange={handleBlankChange}
-                userAnswer={userAnswersMap?.[quiz?.id]?.answer}
-                correctAnswer={userAnswersMap?.[quiz?.id]?.correctAnswer}
-                status={userAnswersMap?.[quiz?.id]?.status}
+                userAnswer={tempAnswer || userAnswersMap?.[quiz?.id]?.answer}
+                correctAnswer={quiz?.answer}
+                isCorrect={quiz?.correct}
+                feedback={quiz?.feedback}
+                keyConcepts={quiz?.keyConcepts}
                 isSubmitted={isSubmitted}
               />
             ))}
@@ -144,7 +145,6 @@ const QuizPage = () => {
                 isSubmitted={isSubmitted}
                 quizzes={quizzes}
                 selectedQuizIndex={selectedQuizIndex}
-                userAnswersMap={userAnswersMap}
                 onClick={handleNavDotClick}
               />
             </ActionGroup>

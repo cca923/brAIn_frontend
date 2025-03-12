@@ -1,12 +1,7 @@
-export const QUIZ_STATUS = {
-  CORRECT: "correct",
-  WRONG: "wrong",
-  DEFAULT: "default",
-};
-
 export const QUIZ_TYPE = {
-  RADIO: "radio",
-  BLANK: "text",
+  RADIO: "single_choice",
+  CLOZE: "cloze",
+  SHORT_ANSWER: "short_answer",
 };
 
 export const MSG_TYPE = {

@@ -11,7 +11,6 @@ const ResultPage = ({
   feedback,
   quizzes,
   selectedQuizIndex,
-  userAnswersMap,
   onNavDotClick,
   onEnd,
   onNewQuiz,
@@ -26,7 +25,6 @@ const ResultPage = ({
         isSubmitted={isSubmitted}
         quizzes={quizzes}
         selectedQuizIndex={selectedQuizIndex}
-        userAnswersMap={userAnswersMap}
         onClick={onNavDotClick}
       />
       <FeedbackCard feedback={feedback} />

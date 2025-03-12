@@ -4,6 +4,9 @@ export const QuizContainer = styled.div`
   padding: 0 100px;
   display: none;
   flex-direction: column;
+  flex: 1;
+  overflow-y: scroll;
+  margin-bottom: 20px;
 
   &.selected {
     display: flex;

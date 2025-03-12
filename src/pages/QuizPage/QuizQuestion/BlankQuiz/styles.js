@@ -14,15 +14,19 @@ export const BlankContainer = styled.div`
     padding: ${({ theme }) => theme.spacing.md};
     border: 1px solid ${({ theme }) => theme.colors.gray};
     border-radius: ${({ theme }) => theme.borderRadius.md};
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
+    margin-bottom: ${({ theme }) => theme.spacing.md};
     resize: none;
-  }
-`;
 
-export const CorrectAnswer = styled.div`
-  .info {
-    color: ${({ theme }) => theme.colors.primary};
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
-  display: flex;
-  flex-direction: column;
+  .correct-ans {
+    margin-bottom: ${({ theme }) => theme.spacing.md};
+
+    .ans {
+      line-height: 1.5;
+      word-break: break-all;
+    }
+  }
 `;

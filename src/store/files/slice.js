@@ -57,7 +57,7 @@ const fileSlice = createSlice({
         const { fileId } = action.payload;
 
         state.loadingMap.removeFile = false;
-        state.files = state.files?.filter((file) => file.id !== fileId);
+        state.files = state.files?.filter((file) => file?.id !== fileId);
       })
       .addCase(handleRemoveFile.rejected, (state, action) => {
         state.loadingMap.removeFile = false;

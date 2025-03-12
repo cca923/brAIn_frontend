@@ -20,6 +20,10 @@ export const RadioOption = styled.label`
 
   input {
     margin-right: ${({ theme }) => theme.spacing.sm};
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   &.correct {

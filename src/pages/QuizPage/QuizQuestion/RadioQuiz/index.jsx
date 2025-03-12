@@ -1,6 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 
+import Suggestion from "../Suggestion";
+
 import { RadioGroup, RadioOption } from "./styles";
 
 const RadioQuiz = ({
@@ -9,6 +11,8 @@ const RadioQuiz = ({
   onChange,
   userAnswer,
   correctAnswer,
+  feedback,
+  keyConcepts,
   isSubmitted,
 }) => {
   const handleChange = ({ value }) => {
@@ -19,26 +23,28 @@ const RadioQuiz = ({
     <RadioGroup>
       {options?.map((option) => (
         <RadioOption
-          key={option?.id}
+          key={option}
           className={classnames({
-            correct: isSubmitted && option?.id === correctAnswer,
+            correct: isSubmitted && option === correctAnswer,
             wrong:
-              isSubmitted &&
-              option?.id === userAnswer &&
-              option?.id !== correctAnswer,
+              isSubmitted && option === userAnswer && option !== correctAnswer,
           })}
         >
           <input
             type="radio"
-            name="answer"
-            value={option?.id}
-            checked={userAnswer === option?.id}
-            onChange={() => handleChange({ value: option?.id })}
+            name={`answer-${quizId}`}
+            value={option}
+            checked={String(userAnswer) === String(option)}
+            onChange={() => handleChange({ value: option })}
             disabled={isSubmitted}
           />
-          {option?.text}
+          {option}
         </RadioOption>
       ))}
+
+      {isSubmitted && (
+        <Suggestion feedback={feedback} keyConcepts={keyConcepts} />
+      )}
     </RadioGroup>
   );
 };

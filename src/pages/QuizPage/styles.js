@@ -17,33 +17,15 @@ export const Card = styled.div`
 `;
 
 export const ActionGroup = styled.div`
-  margin-top: auto;
+  height: 95px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
+  margin-top: auto;
 `;
 
 export const Title = styled.h1`
   font-size: 24px;
   color: ${({ theme }) => theme.colors.dark};
-`;
-
-export const TextInput = styled.input`
-  width: 100%;
-  padding: ${({ theme }) => theme.spacing.md};
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  font-size: 16px;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-`;
-
-export const TextArea = styled.textarea`
-  width: 100%;
-  padding: ${({ theme }) => theme.spacing.md};
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  font-size: 16px;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-  min-height: 100px;
-  resize: vertical;
 `;

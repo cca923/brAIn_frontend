@@ -29,6 +29,12 @@ export const deleteRemoveFile = ({ fileId }) =>
 export const fetchSummary = ({ folderId }) =>
   fetchApiRequest({ endpoint: `api/summarization/${folderId}` });
 
+export const fetchQuizzes = ({ folderId }) =>
+  fetchApiRequest({ endpoint: `api/quiz/${folderId}` });
+
+export const postQuizzesResult = ({ quizId, userAnswers }) =>
+  postApiJsonRequest({ endpoint: "api/quiz", data: { quizId, userAnswers } });
+
 export const postStartChat = ({ folderId }) =>
   postApiJsonRequest({ endpoint: "api/chat/start_chat", data: { folderId } });
 

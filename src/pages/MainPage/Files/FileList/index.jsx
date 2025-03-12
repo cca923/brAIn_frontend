@@ -25,11 +25,11 @@ const FileList = () => {
   return (
     <FileListContainer ref={fileListRef}>
       {files.length > 0 ? (
-        files.map((file) => (
+        files?.map((file) => (
           <FileItem
-            key={file.id}
-            fileId={file.id}
-            name={file.name}
+            key={file?.id}
+            fileId={file?.id}
+            name={file?.name}
             onRemove={handleFileRemove}
           />
         ))

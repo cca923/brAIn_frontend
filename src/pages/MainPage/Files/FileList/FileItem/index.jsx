@@ -1,17 +1,13 @@
 import { FileItemContainer, FileName, RemoveBtn } from "./styles";
 
-const FileItem = ({ fileId, name, onClick, onRemove }) => {
-  const handleItemClick = () => {
-    onClick({ id: fileId });
-  };
-
+const FileItem = ({ fileId, name, onRemove }) => {
   const handleItemRemove = ({ e }) => {
     e.stopPropagation();
-    onRemove({ id: fileId });
+    onRemove?.({ id: fileId });
   };
 
   return (
-    <FileItemContainer onClick={handleItemClick}>
+    <FileItemContainer>
       <FileName>{name}</FileName>
       <RemoveBtn onClick={(e) => handleItemRemove({ e })}>×</RemoveBtn>
     </FileItemContainer>

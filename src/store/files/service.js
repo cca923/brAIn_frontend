@@ -58,9 +58,9 @@ export const handleUploadFile = createAsyncThunk(
 
 export const handleRemoveFile = createAsyncThunk(
   filesTypes.handleRemoveFile,
-  async ({ fileId }, { dispatch }) => {
+  async ({ fileId }) => {
     try {
-      const response = await dispatch(deleteRemoveFile({ fileId }));
+      const response = await deleteRemoveFile({ fileId });
       const { message } = response || {};
       toast.success(message);
 

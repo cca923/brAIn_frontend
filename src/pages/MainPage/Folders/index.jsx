@@ -55,7 +55,8 @@ const Folders = () => {
       return;
     }
 
-    return dispatch(handleAddFolder({ name: folderName }));
+    dispatch(handleAddFolder({ name: folderName }));
+    setIsAddingFolder((prev) => !prev);
   };
 
   useEffect(() => {

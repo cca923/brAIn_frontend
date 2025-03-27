@@ -1,8 +1,6 @@
 import React from "react";
 import classnames from "classnames";
 
-import Suggestion from "../Suggestion";
-
 import { RadioGroup, RadioOption } from "./styles";
 
 const RadioQuiz = ({
@@ -11,8 +9,6 @@ const RadioQuiz = ({
   onChange,
   userAnswer,
   correctAnswer,
-  feedback,
-  keyConcepts,
   isSubmitted,
 }) => {
   const handleChange = ({ value }) => {
@@ -41,10 +37,6 @@ const RadioQuiz = ({
           {option}
         </RadioOption>
       ))}
-
-      {isSubmitted && (
-        <Suggestion feedback={feedback} keyConcepts={keyConcepts} />
-      )}
     </RadioGroup>
   );
 };

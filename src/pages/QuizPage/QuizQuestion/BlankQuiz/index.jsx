@@ -1,7 +1,5 @@
 import React from "react";
 
-import Suggestion from "../Suggestion";
-
 import { BlankContainer } from "./styles";
 
 const BlankQuiz = ({
@@ -10,8 +8,6 @@ const BlankQuiz = ({
   userAnswer,
   correctAnswer,
   isCorrect,
-  feedback,
-  keyConcepts,
   isSubmitted,
 }) => {
   const handleChange = (e) => {
@@ -39,14 +35,6 @@ const BlankQuiz = ({
           <div className="info">Correct Answer:</div>
           <div className="ans">{correctAnswer}</div>
         </div>
-      )}
-
-      {isSubmitted && (
-        <Suggestion
-          correctAnswer={correctAnswer}
-          feedback={feedback}
-          keyConcepts={keyConcepts}
-        />
       )}
     </BlankContainer>
   );

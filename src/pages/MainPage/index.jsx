@@ -12,6 +12,7 @@ import Layout from "./Layout";
 import Folders from "./Folders";
 import Files from "./Files";
 import ActionButtons from "./ActionButtons";
+import Concepts from "./Concepts";
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -33,9 +34,14 @@ function MainPage() {
 
   return (
     <Layout
-      sidebar={
+      leftSidebar={
         <SidebarContainer>
           <Folders />
+        </SidebarContainer>
+      }
+      rightSidebar={
+        <SidebarContainer>
+          <Concepts />
         </SidebarContainer>
       }
     >

@@ -9,6 +9,7 @@ export const FoldersContainer = styled.div`
   padding: ${({ theme }) => theme.spacing.md};
   display: flex;
   flex-direction: column;
+  border-right: 1px solid ${({ theme }) => theme.colors.gray};
 
   .title {
     font-size: 24px;

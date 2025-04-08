@@ -7,17 +7,21 @@ import { idFormatter } from "../utils";
 
 export const handleLoadFolders = createAsyncThunk(
   foldersTypes.handleLoadFolders,
-  async () => {
+  async ({ isInit } = {}, { getState }) => {
     try {
+      const {
+        folders: { selectedFolderId },
+      } = getState();
+
       const response = await fetchFolders();
       const folders = idFormatter(response);
 
-      // Load default files depends on folderId
-      const selectedFolderId = folders?.[0]?.id;
+      // Set the first folder as default
+      const folderId = isInit ? folders?.[0]?.id : selectedFolderId;
 
       return {
         folders,
-        selectedFolderId,
+        folderId,
       };
     } catch (error) {
       return Promise.reject(error.message);

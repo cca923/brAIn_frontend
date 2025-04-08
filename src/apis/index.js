@@ -16,10 +16,30 @@ export const deleteRemoveFolder = ({ folderId }) =>
 export const fetchFiles = ({ folderId }) =>
   fetchApiRequest({ endpoint: `api/files/${folderId}` });
 
-export const postUploadFile = () =>
-  postApiFormDataRequest({ endpoint: "api/files" });
+export const postUploadFile = ({ folderId, file, ...rest }) =>
+  postApiFormDataRequest({
+    endpoint: "api/files",
+    data: { folderId, file },
+    ...rest,
+  });
 
-export const postRemoveFile = () => deleteApiRequest({ endpoint: "api/files" });
+export const deleteRemoveFile = ({ fileId }) =>
+  deleteApiRequest({ endpoint: `api/files/${fileId}` });
 
 export const fetchSummary = ({ folderId }) =>
   fetchApiRequest({ endpoint: `api/summarization/${folderId}` });
+
+export const fetchQuizzes = ({ folderId }) =>
+  fetchApiRequest({ endpoint: `api/quiz/${folderId}` });
+
+export const postQuizzesResult = ({ quizId, userAnswers }) =>
+  postApiJsonRequest({ endpoint: "api/quiz", data: { quizId, userAnswers } });
+
+export const postStartChat = ({ folderId }) =>
+  postApiJsonRequest({ endpoint: "api/chat/start_chat", data: { folderId } });
+
+export const postSendMessage = ({ sessionId, message }) =>
+  postApiJsonRequest({
+    endpoint: "api/chat/chat",
+    data: { sessionId, userMessage: message },
+  });

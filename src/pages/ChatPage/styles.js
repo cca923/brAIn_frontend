@@ -4,8 +4,10 @@ import { Button } from "../../styles/common";
 
 export const PageContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: ${({ theme }) => theme.spacing.xxl};
+  overflow: hidden;
+  position: relative;
 `;
 
 export const Card = styled.div`

@@ -6,21 +6,16 @@ const initialState = {
   files: [],
   loadingMap: {
     loadFiles: false,
-    addFile: false,
+    uploadFile: false,
     removeFile: false,
   },
-  uploadError: null,
   error: null,
 };
 
 const fileSlice = createSlice({
   name: "files",
   initialState,
-  reducers: {
-    setUploadError: (state, action) => {
-      state.uploadError = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       // Load Files API
@@ -40,23 +35,17 @@ const fileSlice = createSlice({
       })
       // Upload File API
       .addCase(handleUploadFile.pending, (state) => {
-        state.loadingMap.addFile = true;
+        state.loadingMap.uploadFile = true;
         state.error = null;
       })
       .addCase(handleUploadFile.fulfilled, (state, action) => {
         const { file } = action.payload;
-        const item = {
-          id: Date.now().toString(),
-          name: file.name,
-          type: file.name.split(".").pop(),
-        };
 
-        state.loadingMap.addFile = false;
-        state.files.push(item);
-        state.uploadError = null;
+        state.loadingMap.uploadFile = false;
+        state.files = [...state.files, file];
       })
       .addCase(handleUploadFile.rejected, (state, action) => {
-        state.loadingMap.addFile = false;
+        state.loadingMap.uploadFile = false;
         state.error = action.error.message;
       })
       // Remove File API
@@ -68,7 +57,7 @@ const fileSlice = createSlice({
         const { fileId } = action.payload;
 
         state.loadingMap.removeFile = false;
-        state.files = state.files?.filter((file) => file.id !== fileId);
+        state.files = state.files?.filter((file) => file?.id !== fileId);
       })
       .addCase(handleRemoveFile.rejected, (state, action) => {
         state.loadingMap.removeFile = false;
@@ -77,5 +66,4 @@ const fileSlice = createSlice({
   },
 });
 
-export const { setUploadError } = fileSlice.actions;
 export default fileSlice.reducer;

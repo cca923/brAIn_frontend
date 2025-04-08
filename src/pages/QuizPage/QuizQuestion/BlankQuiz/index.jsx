@@ -1,22 +1,20 @@
 import React from "react";
 
-import { QUIZ_STATUS } from "../../../../constants";
-
-import { BlankContainer, CorrectAnswer } from "./styles";
+import { BlankContainer } from "./styles";
 
 const BlankQuiz = ({
   quizId,
   onChange,
   userAnswer,
   correctAnswer,
-  status,
+  isCorrect,
   isSubmitted,
 }) => {
   const handleChange = (e) => {
     onChange?.({ quizId, value: e.target.value });
   };
 
-  const isWrong = status === QUIZ_STATUS.WRONG;
+  const displayAnswer = isSubmitted && !isCorrect;
 
   return (
     <BlankContainer>
@@ -32,11 +30,11 @@ const BlankQuiz = ({
         cols={50}
         disabled={isSubmitted}
       />
-      {isWrong && (
-        <CorrectAnswer>
+      {displayAnswer && (
+        <div className="correct-ans">
           <div className="info">Correct Answer:</div>
-          <div>{correctAnswer}</div>
-        </CorrectAnswer>
+          <div className="ans">{correctAnswer}</div>
+        </div>
       )}
     </BlankContainer>
   );

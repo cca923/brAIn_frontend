@@ -1,24 +1,19 @@
-import { useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { IoCloudUploadSharp } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 import { handleUploadFile } from "../../../../store/files/service";
 import { fileSelector } from "../../../../store/selectors";
 import { Icon } from "../../../../styles/common";
 
-import {
-  UploaderContainer,
-  UploadButton,
-  HiddenInput,
-  ErrorMessage,
-} from "./styles";
+import { UploaderContainer, UploadButton, HiddenInput, Info } from "./styles";
 
 const FileUploader = () => {
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
-  const { uploadError } = useSelector(fileSelector);
-
-  const [isUploading, setIsUploading] = useState(false);
+  const { loadingMap } = useSelector(fileSelector);
+  const isUploading = loadingMap?.uploadFile;
 
   const handleUploadClick = () => {
     if (!isUploading) {
@@ -28,17 +23,13 @@ const FileUploader = () => {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-
     if (!file) return;
-
-    setIsUploading(true);
 
     try {
       await dispatch(handleUploadFile({ file })).unwrap();
     } catch (error) {
-      console.error("Upload failed:", error);
+      toast.error(`Upload failed: ${error}`);
     } finally {
-      setIsUploading(false);
       // Reset the file input
       e.target.value = null;
     }
@@ -60,7 +51,7 @@ const FileUploader = () => {
         onChange={handleFileChange}
         disabled={isUploading}
       />
-      {uploadError && <ErrorMessage>{uploadError}</ErrorMessage>}
+      <Info>{"Please upload .pdf, .ppt, or .doc files smaller than 2MB."}</Info>
     </UploaderContainer>
   );
 };

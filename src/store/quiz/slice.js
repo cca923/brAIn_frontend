@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { QUIZ_STATUS } from "../../constants";
-
 import { handleLoadQuizzes, handleSubmitQuiz } from "./service";
 
 const initialState = {
+  quizzesId: "", // quizzes set has its unique id
   quizzes: [],
   selectedQuizIndex: 0,
   userAnswersMap: {
-    // quizId: { answer, status: QUIZ_STATUS, correctAnswer }
+    // quizId: { answer }
   },
   correctCount: 0,
   feedback: "",
@@ -26,7 +25,8 @@ const quizSlice = createSlice({
   reducers: {
     setAnswer: (state, action) => {
       const { quizId, answer } = action.payload;
-      state.userAnswersMap[quizId] = { answer, status: QUIZ_STATUS.DEFAULT }; // Initialize correct status
+
+      state.userAnswersMap[quizId] = { answer };
     },
     goToNextQuiz: (state) => {
       if (state.selectedQuizIndex < state.quizzes.length - 1) {
@@ -55,10 +55,12 @@ const quizSlice = createSlice({
         state.error = null;
       })
       .addCase(handleLoadQuizzes.fulfilled, (state, action) => {
-        const { quizzes } = action.payload;
+        const { quizzesId, quizzes, userAnswersMap } = action.payload;
 
         state.loadingMap.loadQuizzes = false;
+        state.quizzesId = quizzesId;
         state.quizzes = quizzes;
+        state.userAnswersMap = userAnswersMap;
       })
       .addCase(handleLoadQuizzes.rejected, (state, action) => {
         state.loadingMap.loadQuizzes = false;
@@ -70,10 +72,10 @@ const quizSlice = createSlice({
         state.error = null;
       })
       .addCase(handleSubmitQuiz.fulfilled, (state, action) => {
-        const { userAnswersMap, correctCount, feedback } = action.payload;
+        const { quizzes, correctCount, feedback } = action.payload;
 
         state.loadingMap.submitQuiz = false;
-        state.userAnswersMap = userAnswersMap;
+        state.quizzes = quizzes;
         state.correctCount = correctCount;
         state.feedback = feedback;
         state.isSubmitted = true;

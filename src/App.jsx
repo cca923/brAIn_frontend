@@ -1,9 +1,10 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 import { isPageLoadingSelector } from "./store/selectors";
+import Layout from "./components/Layout";
 import Loading from "./components/Loading";
-import Toast from "./components/Toast";
 import MainPage from "./pages/MainPage";
 import SummaryButton from "./pages/SummaryPage";
 import ChatPage from "./pages/ChatPage";
@@ -14,17 +15,9 @@ function App() {
   const isLoading = useSelector(isPageLoadingSelector);
 
   return (
-    <div
-      style={{
-        maxWidth: "1200px",
-        minWidth: "760px",
-        minHeight: "100vh",
-        margin: "0 auto",
-        overflow: "auto",
-      }}
-    >
+    <Layout>
       {isLoading && <Loading />}
-      <Toast />
+      <ToastContainer autoClose={2000} hideProgressBar />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/summary" element={<SummaryButton />} />
@@ -32,7 +25,7 @@ function App() {
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/past" element={<PastPage />} />
       </Routes>
-    </div>
+    </Layout>
   );
 }
 

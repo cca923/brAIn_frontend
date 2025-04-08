@@ -1,28 +1,28 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 import { quizTypes } from "../types";
-import { QUIZ_STATUS } from "../../constants";
+import { fetchQuizzes, postQuizzesResult } from "../../apis";
+import { idFormatter } from "../utils";
 
-import { correctAnswers, quizzes } from "./mockData";
-import { handleUserResult } from "./utils";
-
-// Simulate API delay
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+import { convertToUserAnswersMap, convertToUserAnswers } from "./utils";
 
 export const handleLoadQuizzes = createAsyncThunk(
   quizTypes.handleLoadQuizzes,
   async (_, { getState }) => {
     try {
       const { folders } = getState();
-      // TODO: api
       const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId });
 
-      // Simulate API call
-      await delay(700);
+      const response = await fetchQuizzes({ folderId });
+      const { _id: quizzesId, questions } = response || {};
+      const quizzes = idFormatter(questions ?? []);
+      const userAnswersMap = convertToUserAnswersMap(quizzes);
 
       return {
-        quizzes: quizzes, // TODO: update to api
+        quizzesId,
+        quizzes,
+        userAnswersMap,
       };
     } catch (error) {
       return Promise.reject(error.message);
@@ -34,33 +34,24 @@ export const handleSubmitQuiz = createAsyncThunk(
   quizTypes.handleSubmitQuiz,
   async (_, { getState }) => {
     try {
-      const { folders, quiz } = getState();
-      const { quizzes, userAnswersMap } = quiz;
+      const { quiz } = getState();
+      const { quizzesId, userAnswersMap } = quiz;
+      const userAnswers = convertToUserAnswers(userAnswersMap);
 
-      // TODO: api
-      const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId });
-
-      // Simulate API call
-      await delay(1500);
-
-      const { correctCount, userAnswersMap: newUserAnswersMap } =
-        handleUserResult({
-          quizzes,
-          userAnswersMap,
-          correctAnswers,
-        });
-
-      const feedback =
-        "Excellent work! You have a strong understanding of the material.";
+      const response = await postQuizzesResult({
+        quizId: quizzesId,
+        userAnswers,
+      });
+      const { questions, correctCount, evaluation: feedback } = response || {};
+      const quizzes = idFormatter(questions ?? []);
 
       return {
-        userAnswersMap: newUserAnswersMap,
+        quizzes,
         correctCount,
         feedback,
       };
     } catch (error) {
-      console.error({ error });
+      toast.error(error?.message);
       return Promise.reject(error.message);
     }
   }

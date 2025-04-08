@@ -12,7 +12,7 @@ const ButtonNavigation = ({
   onNextClick,
   onSubmit,
 }) => (
-  <RowButtonsContainer width="50%" mb="40px">
+  <RowButtonsContainer width="50%" mb="20px">
     <NavButton onClick={onPrevClick} disabled={isPrevBtnDisabled}>
       Previous Quiz
     </NavButton>

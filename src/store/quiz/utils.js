@@ -1,37 +1,16 @@
-import { QUIZ_STATUS } from "../../constants";
+export const convertToUserAnswersMap = (quizzes) => {
+  const userAnswersMap = {};
 
-export const handleUserResult = ({
-  quizzes,
-  userAnswersMap,
-  correctAnswers,
-}) => {
-  let correctCount = 0;
+  quizzes?.forEach((quiz) => {
+    userAnswersMap[quiz?.id] = { answer: "" };
+  });
 
-  const updatedUserAnswersMap = quizzes.reduce((acc, quiz) => {
-    const userAnswer = userAnswersMap?.[quiz?.id];
-    const correctAnswer = correctAnswers?.[quiz?.id];
+  return userAnswersMap;
+};
 
-    // Compare answers
-    if (userAnswer?.answer === correctAnswer) {
-      correctCount++;
-
-      // Update the userAnswersMap with correct status
-      acc[quiz?.id] = {
-        answer: userAnswer?.answer,
-        status: QUIZ_STATUS.CORRECT,
-        correctAnswer,
-      };
-    } else {
-      // Update the userAnswersMap with wrong status
-      acc[quiz.id] = {
-        answer: userAnswer?.answer,
-        status: QUIZ_STATUS.WRONG,
-        correctAnswer,
-      };
-    }
-
-    return acc; // Return accumulated answers
-  }, {});
-
-  return { correctCount, userAnswersMap: updatedUserAnswersMap };
+export const convertToUserAnswers = (userAnswersMap) => {
+  return Object.entries(userAnswersMap)?.map(([id, { answer }]) => ({
+    _id: id,
+    userAnswer: answer,
+  }));
 };

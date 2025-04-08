@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const RadioGroup = styled.div`
   display: flex;
@@ -20,10 +20,15 @@ export const RadioOption = styled.label`
 
   input {
     margin-right: ${({ theme }) => theme.spacing.sm};
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   &.correct {
     color: ${({ theme }) => theme.colors.primary};
+    font-weight: 600;
   }
   &.wrong {
     color: ${({ theme }) => theme.colors.danger};

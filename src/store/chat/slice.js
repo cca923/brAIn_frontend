@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { MSG_TYPE } from "../../constants";
 
-import { handleLoadChat, handleSendMessage } from "./service";
+import { handleStartChat, handleSendMessage } from "./service";
 
 const initialState = {
+  sessionId: "",
   messages: [
     {
       type: MSG_TYPE.SERVER,
@@ -14,7 +15,7 @@ const initialState = {
   ],
   feedback: "",
   loadingMap: {
-    loadChat: false,
+    startChat: false,
     sendMessage: false,
   },
   error: null,
@@ -34,19 +35,20 @@ const chatSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Load Chat
-      .addCase(handleLoadChat.pending, (state) => {
-        state.loadingMap.loadChat = true;
+      // Start Chat
+      .addCase(handleStartChat.pending, (state) => {
+        state.loadingMap.startChat = true;
         state.error = null;
       })
-      .addCase(handleLoadChat.fulfilled, (state, action) => {
-        const { message } = action.payload;
+      .addCase(handleStartChat.fulfilled, (state, action) => {
+        const { sessionId, message } = action.payload;
 
-        state.loadingMap.loadChat = false;
+        state.loadingMap.startChat = false;
+        state.sessionId = sessionId;
         state.messages = [...state.messages, message];
       })
-      .addCase(handleLoadChat.rejected, (state, action) => {
-        state.loadingMap.loadChat = false;
+      .addCase(handleStartChat.rejected, (state, action) => {
+        state.loadingMap.startChat = false;
         state.error = action.error.message;
       })
       // Send Message
@@ -55,9 +57,10 @@ const chatSlice = createSlice({
         state.error = null;
       })
       .addCase(handleSendMessage.fulfilled, (state, action) => {
-        const { message, feedback } = action.payload;
+        const { sessionId, message, feedback } = action.payload;
 
         state.loadingMap.sendMessage = false;
+        state.sessionId = sessionId;
         state.messages = [...state.messages, message];
         state.feedback = feedback;
       })

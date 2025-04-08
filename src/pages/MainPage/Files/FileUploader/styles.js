@@ -6,7 +6,7 @@ export const UploaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: auto;
+  margin-top: ${({ theme }) => theme.spacing.md};
 `;
 
 export const UploadButton = styled(Button)`
@@ -34,8 +34,8 @@ export const HiddenInput = styled.input`
   display: none;
 `;
 
-export const ErrorMessage = styled.div`
-  color: ${({ theme }) => theme.colors.danger};
-  margin-top: ${({ theme }) => theme.spacing.md};
-  text-align: center;
+export const Info = styled.div`
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.secondary};
+  margin-top: ${({ theme }) => theme.spacing.sm};
 `;

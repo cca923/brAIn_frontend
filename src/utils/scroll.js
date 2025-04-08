@@ -6,3 +6,11 @@ export const scrollToBottom = (element) => {
     behavior: "smooth",
   });
 };
+
+export const scrollToTarget = (element) => {
+  if (!element) return;
+
+  element.scrollIntoView({
+    behavior: "smooth",
+  });
+};

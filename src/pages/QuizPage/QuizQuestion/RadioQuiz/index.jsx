@@ -19,24 +19,22 @@ const RadioQuiz = ({
     <RadioGroup>
       {options?.map((option) => (
         <RadioOption
-          key={option?.id}
+          key={option}
           className={classnames({
-            correct: isSubmitted && option?.id === correctAnswer,
+            correct: isSubmitted && option === correctAnswer,
             wrong:
-              isSubmitted &&
-              option?.id === userAnswer &&
-              option?.id !== correctAnswer,
+              isSubmitted && option === userAnswer && option !== correctAnswer,
           })}
         >
           <input
             type="radio"
-            name="answer"
-            value={option?.id}
-            checked={userAnswer === option?.id}
-            onChange={() => handleChange({ value: option?.id })}
+            name={`answer-${quizId}`}
+            value={option}
+            checked={String(userAnswer) === String(option)}
+            onChange={() => handleChange({ value: option })}
             disabled={isSubmitted}
           />
-          {option?.text}
+          {option}
         </RadioOption>
       ))}
     </RadioGroup>

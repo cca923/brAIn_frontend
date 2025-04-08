@@ -9,7 +9,6 @@ import {
 const initialState = {
   folders: [],
   selectedFolderId: "",
-  isAddingFolder: false,
   loadingMap: {
     loadFolders: false,
     addFolder: false,
@@ -26,9 +25,6 @@ const folderSlice = createSlice({
       const { folderId } = action.payload;
 
       state.selectedFolderId = folderId;
-    },
-    toggleAddFolder: (state) => {
-      state.isAddingFolder = !state.isAddingFolder;
     },
   },
   extraReducers: (builder) => {
@@ -59,7 +55,7 @@ const folderSlice = createSlice({
 
         state.loadingMap.addFolder = false;
         state.folders = [...state.folders, folder];
-        state.isAddingFolder = false;
+        state.selectedFolderId = folder?.id; // set to new folderId
       })
       .addCase(handleAddFolder.rejected, (state, action) => {
         state.loadingMap.addFolder = false;
@@ -78,8 +74,7 @@ const folderSlice = createSlice({
           (folder) => folder.id !== folderId
         );
         if (state.selectedFolderId === folderId && state.folders.length > 0) {
-          state.selectedFolderId = state.folders[0].id;
-          state.folders[0].selected = true;
+          state.selectedFolderId = state.folders[0]?.id;
         }
       })
       .addCase(handleRemoveFolder.rejected, (state, action) => {
@@ -89,5 +84,5 @@ const folderSlice = createSlice({
   },
 });
 
-export const { setSelectedFolderId, toggleAddFolder } = folderSlice.actions;
+export const { setSelectedFolderId } = folderSlice.actions;
 export default folderSlice.reducer;

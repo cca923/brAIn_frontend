@@ -13,6 +13,7 @@ const VoiceMode = ({
   toggleRecording,
   onSend,
   transcript,
+  disabled,
 }) => {
   const recordingPrompt = transcript || "Listening...";
   const displayPrompt = isRecording
@@ -25,6 +26,7 @@ const VoiceMode = ({
         type={isRecording ? "danger" : "default"}
         onClick={toggleRecording}
         iconComponent={isRecording ? <FaStop /> : <BsRecordCircle />}
+        disabled={disabled}
       />
 
       <RecordPrompt>{displayPrompt}</RecordPrompt>

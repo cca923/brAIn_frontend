@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FileListContainer = styled.div`
-  height: 350px;
+  flex: 1;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;

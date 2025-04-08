@@ -1,15 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 
-import { QUIZ_STATUS } from "../../../constants";
-
 import { NavigationContainer, NavDot } from "./styles";
 
 const DotNavigation = ({
   isSubmitted,
   quizzes,
   selectedQuizIndex,
-  userAnswersMap,
   onClick,
 }) => {
   const handleClick = ({ index }) => {
@@ -23,8 +20,8 @@ const DotNavigation = ({
           key={index}
           className={classnames({
             active: !isSubmitted && selectedQuizIndex === index,
-            correct: userAnswersMap?.[quiz?.id]?.status === QUIZ_STATUS.CORRECT,
-            wrong: userAnswersMap?.[quiz?.id]?.status === QUIZ_STATUS.WRONG,
+            correct: quiz?.correct === true,
+            wrong: quiz?.correct === false,
           })}
           onClick={() => handleClick({ index })}
         >

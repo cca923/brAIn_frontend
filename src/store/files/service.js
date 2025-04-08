@@ -1,24 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 import { filesTypes } from "../types";
-import { fetchFiles } from "../../apis";
+import { fetchFiles, postUploadFile, deleteRemoveFile } from "../../apis";
 import { idFormatter } from "../utils";
-import { setSelectedFolderId } from "../folders/slice";
-
-import { setUploadError } from "./slice";
-
-// Simulate API delay
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const handleLoadFiles = createAsyncThunk(
   filesTypes.handleLoadFiles,
-  async ({ folderId }, { dispatch }) => {
+  async ({ folderId }) => {
     try {
       const response = await fetchFiles({ folderId });
       const files = idFormatter(response);
-
-      // Switch to this folder after successfully loads its files
-      dispatch(setSelectedFolderId({ folderId }));
 
       return {
         files,
@@ -31,51 +23,34 @@ export const handleLoadFiles = createAsyncThunk(
 
 export const handleUploadFile = createAsyncThunk(
   filesTypes.handleUploadFile,
-  async ({ file }, { dispatch, getState }) => {
+  async ({ file }, { getState }) => {
     try {
       const { folders } = getState();
-      // TODO: api
       const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId });
 
       // Validate file type
       const fileType = file.name.split(".").pop().toLowerCase();
       const validTypes = ["pdf", "ppt", "doc", "pptx", "docx"];
-
       if (!validTypes.includes(fileType)) {
-        dispatch(
-          setUploadError(
-            "Invalid file type. Please upload .pdf, .ppt, or .doc files."
-          )
-        );
+        toast.error("Invalid file type.");
         return Promise.reject("Invalid file type");
       }
 
       // Validate file size (2MB)
       const maxSize = 2 * 1024 * 1024; // 2MB in bytes
       if (file.size > maxSize) {
-        dispatch(setUploadError("File size exceeds 2MB limit."));
+        toast.error("File size exceeds 2MB limit.");
         return Promise.reject("File size too large");
       }
 
-      // Simulate API upload
-      await delay(1000);
-
-      // You could make a real API call here:
-      // const formData = new FormData();
-      // formData.append('file', file);
-      // formData.append('folderId', folderId);
-      //
-      // const response = await fetch('/api/files/upload', {
-      //   method: 'POST',
-      //   body: formData
-      // });
-      // const data = await response.json();
+      const response = await postUploadFile({ folderId, file });
+      const { _id: id, name } = response || {};
 
       return {
-        file,
+        file: { id, name },
       };
     } catch (error) {
+      toast.error(error?.message);
       return Promise.reject(error.message);
     }
   }
@@ -83,25 +58,17 @@ export const handleUploadFile = createAsyncThunk(
 
 export const handleRemoveFile = createAsyncThunk(
   filesTypes.handleRemoveFile,
-  async ({ fileId }, { getState }) => {
+  async ({ fileId }) => {
     try {
-      const { folders } = getState();
-      // TODO: api
-      const folderId = folders?.selectedFolderId;
-      console.log("##", { folderId });
-
-      // Simulate API call
-      await delay(500);
-
-      // You could make a real API call here:
-      // await fetch(`/api/files/${fileId}`, {
-      //   method: 'DELETE'
-      // });
+      const response = await deleteRemoveFile({ fileId });
+      const { message } = response || {};
+      toast.success(message);
 
       return {
         fileId,
       };
     } catch (error) {
+      toast.error(error?.message);
       return Promise.reject(error.message);
     }
   }

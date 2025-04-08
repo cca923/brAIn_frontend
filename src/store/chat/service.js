@@ -49,7 +49,7 @@ export const handleSendMessage = createAsyncThunk(
       return {
         sessionId,
         message: serverMsg,
-        feedback,
+        feedback: feedback?.overallFeedback,
       };
     } catch (error) {
       return Promise.reject(error.message);

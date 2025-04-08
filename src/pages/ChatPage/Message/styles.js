@@ -19,7 +19,6 @@ export const MsgText = styled.div`
   background-color: ${({ theme }) => theme.colors.light};
   color: ${({ theme }) => theme.colors.dark};
   line-height: 1.5;
-  word-break: break-all;
 `;
 
 export const MsgContainer = styled.div`

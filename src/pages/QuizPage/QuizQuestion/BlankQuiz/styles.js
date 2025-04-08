@@ -22,8 +22,6 @@ export const BlankContainer = styled.div`
     }
   }
   .correct-ans {
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-
     .ans {
       line-height: 1.5;
       word-break: break-all;

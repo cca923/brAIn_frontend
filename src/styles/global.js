@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 
   input {
     outline: none;
-  }
+  }  
 `;
 
 export default GlobalStyle;

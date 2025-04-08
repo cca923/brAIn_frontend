@@ -1,10 +1,11 @@
 import { LayoutContainer, MainContent, Sidebar } from "./styles";
 
-const Layout = ({ sidebar, children }) => {
+const Layout = ({ children, leftSidebar, rightSidebar }) => {
   return (
     <LayoutContainer>
-      <Sidebar>{sidebar}</Sidebar>
+      {leftSidebar && <Sidebar>{leftSidebar}</Sidebar>}
       <MainContent>{children}</MainContent>
+      {rightSidebar && <Sidebar>{rightSidebar}</Sidebar>}
     </LayoutContainer>
   );
 };

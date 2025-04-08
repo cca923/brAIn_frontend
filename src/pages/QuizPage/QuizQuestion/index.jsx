@@ -3,6 +3,7 @@ import { QUIZ_TYPE } from "../../../constants";
 import { QuizContainer, QuizTitle, QuizText } from "./styles";
 import RadioQuiz from "./RadioQuiz";
 import BlankQuiz from "./BlankQuiz";
+import Suggestion from "./Suggestion";
 
 const QuizQuestion = ({
   className,
@@ -33,8 +34,6 @@ const QuizQuestion = ({
               onChange={onRadioChange}
               userAnswer={userAnswer}
               correctAnswer={correctAnswer}
-              feedback={feedback}
-              keyConcepts={keyConcepts}
               isSubmitted={isSubmitted}
             />
           );
@@ -47,8 +46,6 @@ const QuizQuestion = ({
               userAnswer={userAnswer}
               correctAnswer={correctAnswer}
               isCorrect={isCorrect}
-              feedback={feedback}
-              keyConcepts={keyConcepts}
               isSubmitted={isSubmitted}
             />
           );
@@ -56,6 +53,10 @@ const QuizQuestion = ({
           return null;
       }
     })()}
+
+    {isSubmitted && (
+      <Suggestion feedback={feedback} keyConcepts={keyConcepts} />
+    )}
   </QuizContainer>
 );
 export default QuizQuestion;

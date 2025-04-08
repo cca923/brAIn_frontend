@@ -10,6 +10,7 @@ import useChatMode from "../../hooks/useChatMode";
 import { handleStartChat } from "../../store/chat/service";
 import { resetChat } from "../../store/chat/slice";
 import { chatSelector } from "../../store/selectors";
+import { handleLoadFolders } from "../../store/folders/service";
 import FeedbackCard from "../../components/FeedbackCard";
 import Header from "../../containers/Header";
 
@@ -47,6 +48,7 @@ const ChatPage = () => {
   const handleEndChat = () => {
     dispatch(resetChat());
     navigate("/");
+    dispatch(handleLoadFolders());
   };
 
   const handleNewChat = () => {

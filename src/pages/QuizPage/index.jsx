@@ -12,6 +12,7 @@ import {
 } from "../../store/quiz/slice";
 import { handleLoadQuizzes, handleSubmitQuiz } from "../../store/quiz/service";
 import { quizSelector } from "../../store/selectors";
+import { handleLoadFolders } from "../../store/folders/service";
 import Header from "../../containers/Header";
 
 import { PageContainer, Card, Title, ActionGroup } from "./styles";
@@ -83,6 +84,7 @@ const QuizPage = () => {
   const handleEndQuiz = () => {
     dispatch(resetQuiz());
     navigate("/");
+    dispatch(handleLoadFolders());
   };
 
   const handleNewQuiz = () => {

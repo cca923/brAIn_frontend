@@ -10,7 +10,7 @@ export const ItemContainer = styled.div`
   font-weight: 600;
   position: relative;
 
-  .icon-complete {
+  .icon-status {
     position: absolute;
     top: 10px;
     right: 10px;

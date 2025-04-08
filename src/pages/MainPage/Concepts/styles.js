@@ -6,7 +6,7 @@ export const ConceptsContainer = styled.div`
   padding: ${({ theme }) => theme.spacing.md};
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.md};);
+  gap: ${({ theme }) => theme.spacing.md};
 
   .title {
     font-size: 24px;
@@ -15,6 +15,7 @@ export const ConceptsContainer = styled.div`
 
   .description {
     color: ${({ theme }) => theme.colors.secondary};
+    line-height: 1.2;
   }
 
   .wrapper {

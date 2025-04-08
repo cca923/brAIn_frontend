@@ -1,4 +1,5 @@
-import { FaCheckCircle } from "react-icons/fa";
+import { FaFaceSmile } from "react-icons/fa6";
+import { FaFaceFrown } from "react-icons/fa6";
 
 import ProgressBar from "../../../../components/ProgressBar";
 import { Icon } from "../../../../styles/common";
@@ -6,17 +7,23 @@ import { percentageValue } from "../../../../utils/format";
 
 import { ItemContainer } from "./styles";
 
-const Item = ({ concept, percentage }) => {
-  const value = percentageValue(percentage);
-  const isComplete = value === 100;
+const Item = ({ name, familiarity }) => {
+  const value = percentageValue(+familiarity * 100);
+  const familiar = value >= 80;
+  const unfamiliar = value <= 20;
 
   return (
     <ItemContainer>
-      {concept}
+      {name}
       <ProgressBar percentage={value} />
-      {isComplete && (
-        <Icon className="icon-complete" fontSize="20px">
-          <FaCheckCircle color="#51ca71" />
+      {familiar && (
+        <Icon className="icon-status" fontSize="20px">
+          <FaFaceSmile color="#51ca71" />
+        </Icon>
+      )}
+      {unfamiliar && (
+        <Icon className="icon-status" fontSize="20px">
+          <FaFaceFrown color="#e74c3c" />
         </Icon>
       )}
     </ItemContainer>

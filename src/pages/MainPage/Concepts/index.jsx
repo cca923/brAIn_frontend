@@ -1,42 +1,18 @@
-import Item from "./Item";
-import { ConceptsContainer } from "./styles";
+import { useSelector } from "react-redux";
 
-const list = [
-  {
-    concept: "Paxos protocol",
-    percentage: 100,
-  },
-  {
-    concept: "Acceptors",
-    percentage: 86,
-  },
-  {
-    concept: "Distributed consensus",
-    percentage: 73.5,
-  },
-  {
-    concept: "Distributed consensus",
-    percentage: 50,
-  },
-  {
-    concept: "Distributed consensus",
-    percentage: 0,
-  },
-  {
-    concept: "Distributed consensus",
-    percentage: 34,
-  },
-  {
-    concept: "Distributed consensus",
-    percentage: 28,
-  },
-  {
-    concept: "Distributed consensus",
-    percentage: 62,
-  },
-];
+import { folderSelector } from "../../../store/selectors";
+
+import { ConceptsContainer } from "./styles";
+import Item from "./Item";
+import Empty from "./Empty";
 
 const Concepts = () => {
+  const { folders, selectedFolderId } = useSelector(folderSelector);
+  const folder = folders?.find((data) => data?.id === selectedFolderId);
+  const concepts = [...(folder?.concepts || [])].sort(
+    (a, b) => a?.familiarity - b?.familiarity
+  );
+
   return (
     <ConceptsContainer>
       <h2 className="title">Key Concepts</h2>
@@ -44,7 +20,8 @@ const Concepts = () => {
         Familiarity based on AI Quiz and AI Chat results, scored from 0 to 100%
       </p>
       <div className="wrapper">
-        {list?.map((data, index) => (
+        {concepts?.length === 0 && <Empty />}
+        {concepts?.map((data, index) => (
           <Item key={index} {...data} />
         ))}
       </div>
